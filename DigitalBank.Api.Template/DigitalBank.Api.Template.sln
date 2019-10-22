@@ -17,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Template.Bu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Template.Repository", "DigitalBank.Api.Template.Repository\DigitalBank.Api.Template.Repository.csproj", "{DDBDB738-D212-4D2B-8BE3-F74A9DC0F380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalBank.Api.Template.Business.Test", "DigitalBank.Api.Template.Business.Test\DigitalBank.Api.Template.Business.Test.csproj", "{81E6B23E-EEAD-45AE-8E88-BA4EF613F43A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Template.Test", "DigitalBank.Api.Template.Test\DigitalBank.Api.Template.Test.csproj", "{41CF19F3-1938-4427-97BC-C89EB7BFA84F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalBank.Api.Template.Test", "DigitalBank.Api.Template.Test\DigitalBank.Api.Template.Test.csproj", "{41CF19F3-1938-4427-97BC-C89EB7BFA84F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DigitalBank.Api.Template.Business.Test", "DigitalBank.Api.Template.Business.Test\DigitalBank.Api.Template.Business.Test.csproj", "{9FC8AFAA-E9DC-4254-B2B8-7BE714B2F61B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,14 +39,14 @@ Global
 		{DDBDB738-D212-4D2B-8BE3-F74A9DC0F380}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDBDB738-D212-4D2B-8BE3-F74A9DC0F380}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDBDB738-D212-4D2B-8BE3-F74A9DC0F380}.Release|Any CPU.Build.0 = Release|Any CPU
-		{81E6B23E-EEAD-45AE-8E88-BA4EF613F43A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{81E6B23E-EEAD-45AE-8E88-BA4EF613F43A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{81E6B23E-EEAD-45AE-8E88-BA4EF613F43A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{81E6B23E-EEAD-45AE-8E88-BA4EF613F43A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41CF19F3-1938-4427-97BC-C89EB7BFA84F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{41CF19F3-1938-4427-97BC-C89EB7BFA84F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41CF19F3-1938-4427-97BC-C89EB7BFA84F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41CF19F3-1938-4427-97BC-C89EB7BFA84F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FC8AFAA-E9DC-4254-B2B8-7BE714B2F61B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FC8AFAA-E9DC-4254-B2B8-7BE714B2F61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FC8AFAA-E9DC-4254-B2B8-7BE714B2F61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FC8AFAA-E9DC-4254-B2B8-7BE714B2F61B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,8 +55,8 @@ Global
 		{7D8C2978-5536-4D8D-AB53-ABB93C81A3B3} = {6E1189EF-F474-4ED3-8F21-C21B6A206958}
 		{C1AA42DE-0FBA-425B-A2DB-3DE5BD9E3910} = {749ED164-CCF1-4D0F-8FD5-BC3DF9304C7A}
 		{DDBDB738-D212-4D2B-8BE3-F74A9DC0F380} = {84DF98FA-F390-43A7-A9D8-E20468BFE378}
-		{81E6B23E-EEAD-45AE-8E88-BA4EF613F43A} = {1E115B3C-3923-4C23-86DF-D0452CEE8412}
 		{41CF19F3-1938-4427-97BC-C89EB7BFA84F} = {1E115B3C-3923-4C23-86DF-D0452CEE8412}
+		{9FC8AFAA-E9DC-4254-B2B8-7BE714B2F61B} = {1E115B3C-3923-4C23-86DF-D0452CEE8412}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E95743DE-4CD5-45F0-80A1-D00C62CF24CE}

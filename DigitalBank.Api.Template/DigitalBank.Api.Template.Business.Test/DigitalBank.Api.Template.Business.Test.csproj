@@ -12,10 +12,4 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DigitalBank.Api.Template.Business\DigitalBank.Api.Template.Business.csproj" />
-    <ProjectReference Include="..\DigitalBank.Api.Template.Repository\DigitalBank.Api.Template.Repository.csproj" />
-    <ProjectReference Include="..\DigitalBank.Api.Template\DigitalBank.Api.Template.csproj" />
-  </ItemGroup>
-
 </Project>
