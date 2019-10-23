@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalBank.Api.Pub.Authenticate.Business\DigitalBank.Api.Pub.Authenticate.Business.csproj" />
+    <ProjectReference Include="..\DigitalBank.Api.Pub.Authenticate.Repository\DigitalBank.Api.Pub.Authenticate.Repository.csproj" />
     <ProjectReference Include="..\DigitalBank.Api.Pub.Authenticate.Security\DigitalBank.Api.Pub.Authenticate.Security.csproj" />
   </ItemGroup>
 

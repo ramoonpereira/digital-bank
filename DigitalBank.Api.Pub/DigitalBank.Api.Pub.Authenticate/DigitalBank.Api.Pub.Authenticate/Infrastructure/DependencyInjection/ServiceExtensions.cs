@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DigitalBank.Api.Pub.Authenticate.Infrastructure.AutoMapper;
+using DigitalBank.Api.Pub.Authenticate.Repository.DatabaseContext;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -84,6 +86,16 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
 
             #region Application
             #endregion
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration["MYSQL_CONNECTIONSTRING"];
+
+            services.AddDbContext<AppDbContext>(options =>
+               options.UseMySql(connectionString));
 
             return services;
         }

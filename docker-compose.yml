@@ -46,10 +46,8 @@ secrets:
     file: ./secrets/MYSQL_USER
   MYSQL_PASSWORD:
     file: ./secrets/MYSQL_PASSWORD
-  MYSQL_HOST:
-    file: ./secrets/MYSQL_HOST
-  MYSQL_PORT:
-    file: ./secrets/MYSQL_PORT
+  MYSQL_CONNECTIONSTRING:
+    file: ./secrets/MYSQL_CONNECTIONSTRING
   RABBITMQ_ERLANG_COOKIE:
     file: ./secrets/RABBITMQ_ERLANG_COOKIE
   RABBITMQ_DEFAULT_USER:

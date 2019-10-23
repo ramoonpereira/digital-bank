@@ -42,6 +42,7 @@ namespace DigitalBank.Api.Pub.Authenticate
             services.AddCors();
             services.AddMvc();
             services.RegisterWebApiServices(Configuration);
+            services.RegisterDatabase(Configuration);
         }
 
         /// <summary>
