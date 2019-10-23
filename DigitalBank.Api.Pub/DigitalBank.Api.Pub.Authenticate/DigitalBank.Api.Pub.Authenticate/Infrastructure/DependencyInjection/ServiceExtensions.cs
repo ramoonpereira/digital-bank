@@ -1,6 +1,12 @@
 ﻿using AutoMapper;
+using DigitalBank.Api.Pub.Authenticate.Business.Implementations;
+using DigitalBank.Api.Pub.Authenticate.Business.Interfaces;
+using DigitalBank.Api.Pub.Authenticate.Business.Repository;
 using DigitalBank.Api.Pub.Authenticate.Infrastructure.AutoMapper;
-using DigitalBank.Api.Pub.Authenticate.Repository.DatabaseContext;
+using DigitalBank.Api.Pub.Authenticate.Repository.DbContext;
+using DigitalBank.Api.Pub.Authenticate.Security.Encryptor.Handler;
+using DigitalBank.Api.Pub.Authenticate.Security.Encryptor.Handler.Interfaces;
+using DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -85,6 +91,21 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
             #endregion
 
             #region Application
+
+            #region Repository
+            services.AddSingleton<ICustomerRepository, CustomerRepository>();
+            #endregion
+
+            #region Handler
+            services.AddSingleton<IEncryptorHandler, EncryptorHandler>();
+            services.AddSingleton<ITokenHandler, Security.JWT.Handler.TokenHandler>();
+            #endregion
+
+            #region Business
+            services.AddScoped<IAuthenticateBusiness, AuthenticateBusiness>();
+            services.AddScoped<ICustomerBusiness, CustomerBusiness>();
+            #endregion
+
             #endregion
 
             return services;

@@ -30,10 +30,4 @@
     <ProjectReference Include="..\DigitalBank.Api.Pub.Authenticate.Security\DigitalBank.Api.Pub.Authenticate.Security.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\v1\" />
-    <Folder Include="DTOs\v1\Responses\" />
-    <Folder Include="DTOs\v1\Requests\" />
-  </ItemGroup>
-
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DigitalBank.Api.Pub.Authenticate.Business.Models.Customer
@@ -7,6 +8,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Models.Customer
     [Table("customers")]
     public class Customer
     {
+        [Key]
         [Column("id")]
         public int Id { get; set; }
 

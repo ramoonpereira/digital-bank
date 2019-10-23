@@ -1,4 +1,5 @@
-﻿using DigitalBank.Api.Pub.Authenticate.Security.JWT.Model;
+﻿using DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler.Interfaces;
+using DigitalBank.Api.Pub.Authenticate.Security.JWT.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
 {
-    public class TokenHandler
+    public class TokenHandler : ITokenHandler
     {
         private IConfiguration _configuration;
         private AuthorizeOptions _options;
