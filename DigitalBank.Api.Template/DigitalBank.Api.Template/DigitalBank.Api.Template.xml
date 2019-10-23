@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DigitalBank.Api.Template</name>
+    </assembly>
+    <members>
+        <member name="T:DigitalBank.Api.Template.Infrastructure.AutoMapper.MappingProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Template.Infrastructure.AutoMapper.MappingProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:DigitalBank.Api.Template.Program">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Template.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Template.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DigitalBank.Api.Template.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Template.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:DigitalBank.Api.Template.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Template.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Template.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

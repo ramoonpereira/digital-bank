@@ -5,9 +5,21 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>E:\github\digital-bank\DigitalBank.Api.Template\DigitalBank.Api.Template\DigitalBank.Api.Template.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>E:\github\digital-bank\DigitalBank.Api.Template\DigitalBank.Api.Template\DigitalBank.Api.Template.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +30,6 @@
     <Folder Include="Controllers\v1\" />
     <Folder Include="DTOs\v1\Responses\" />
     <Folder Include="DTOs\v1\Requests\" />
-    <Folder Include="Infrastructure\AutoMapper\" />
   </ItemGroup>
 
 </Project>
