@@ -65,6 +65,11 @@ namespace DigitalBank.Api.Template.Security.JWT.Handler
                 }
             );
 
+            foreach (var role in user.Permissions.Split(','))
+            {
+                identity.AddClaim(new Claim(ClaimTypes.Role, role));
+            }
+
             return Task.FromResult(identity);
         }
 
@@ -111,7 +116,7 @@ namespace DigitalBank.Api.Template.Security.JWT.Handler
 
         private DateTime GenerateExperation()
         {
-            return DateTime.UtcNow.Add(TimeSpan.FromHours(Convert.ToDouble(_configuration["Jwt:ExpireHours"])));
+            return DateTime.UtcNow.Add(TimeSpan.FromHours(Convert.ToDouble(_configuration["JWT_EXPIREHOURS"])));
         }
 
         private static long ToUnixEpochDate(DateTime date)

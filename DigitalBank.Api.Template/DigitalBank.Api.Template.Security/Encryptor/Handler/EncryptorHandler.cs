@@ -10,10 +10,12 @@ namespace DigitalBank.Api.Template.Security.Encryptor.Handler
     {
         private IConfiguration _configuration;
         private SHA256 _encryptor;
+        private string _secret;
 
         public EncryptorHandler(IConfiguration configuration) {
             _encryptor = SHA256.Create();
             _configuration = configuration;
+            _secret = _configuration["ENCRYPTOR_SECRET"];
         }
 
 
@@ -24,7 +26,7 @@ namespace DigitalBank.Api.Template.Security.Encryptor.Handler
         /// <returns>Verdadeiro ou Falso</returns>
         public string CreatePassword(string pass)
         {
-            return EncryptPassword((pass + _configuration["Encryptor:Secret"]));
+            return EncryptPassword((pass + _secret));
         }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace DigitalBank.Api.Template.Security.Encryptor.Handler
         /// <returns>Verdadeiro ou Falso</returns>
         public bool CheckPassword(string typedPassword, string savedPassword)
         {
-            return EncryptPassword((typedPassword + _configuration["Encryptor:Secret"])) == savedPassword;
+            return EncryptPassword((typedPassword + _secret)) == savedPassword;
         }
 
         /// <summary>

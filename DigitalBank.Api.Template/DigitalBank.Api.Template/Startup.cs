@@ -10,6 +10,7 @@ using DigitalBank.Api.Template.Infrastructure.AutoMapper;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using DigitalBank.Api.Template.Infrastructure.DependencyInjection;
 
 namespace DigitalBank.Api.Template
 {
@@ -40,63 +41,7 @@ namespace DigitalBank.Api.Template
         {
             services.AddCors();
             services.AddMvc();
-
-            var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Secret"]);
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
-
-            services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc(Configuration["Application:Version"],
-                    new Info
-                    {
-                        Title = Configuration["Application:Title"],
-                        Version = Configuration["Application:Version"],
-                        Description = Configuration["Application:Description"]
-                    });
-
-                options.AddSecurityDefinition("bearer",
-                    new ApiKeyScheme
-                    {
-                        In = "header",
-                        Description = "Autenticação baseada em Json Web Token (JWT)",
-                        Name = "Authorization",
-                        Type = "apiKey"
-                    });
-
-                var applicationBasePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var applicationName = PlatformServices.Default.Application.ApplicationName;
-                var xmlDocumentPath = Path.Combine(applicationBasePath, $"{applicationName}.xml");
-
-                if (File.Exists(xmlDocumentPath))
-                {
-                    options.IncludeXmlComments(xmlDocumentPath);
-                }
-
-            });
-
-            var mappingConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-
-            IMapper mapper = mappingConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.RegisterWebApiServices(Configuration);
         }
 
         /// <summary>
