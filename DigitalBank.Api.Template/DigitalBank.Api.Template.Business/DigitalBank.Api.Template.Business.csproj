@@ -10,4 +10,12 @@
     <Folder Include="Implementations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalBank.Api.Template.Security\DigitalBank.Api.Template.Security.csproj" />
+  </ItemGroup>
+
 </Project>

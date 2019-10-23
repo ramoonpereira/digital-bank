@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>E:\github\digital-bank\DigitalBank.Api.Template\DigitalBank.Api.Template\DigitalBank.Api.Template.xml</DocumentationFile>
+    <DocumentationFile>DigitalBank.Api.Template.xml</DocumentationFile>
     <WarningLevel>1</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>E:\github\digital-bank\DigitalBank.Api.Template\DigitalBank.Api.Template\DigitalBank.Api.Template.xml</DocumentationFile>
+    <DocumentationFile>DigitalBank.Api.Template.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalBank.Api.Template.Business\DigitalBank.Api.Template.Business.csproj" />
+    <ProjectReference Include="..\DigitalBank.Api.Template.Security\DigitalBank.Api.Template.Security.csproj" />
   </ItemGroup>
 
   <ItemGroup>
