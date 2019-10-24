@@ -18,7 +18,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.Encryptor.Handler
         {
             _encryptor = SHA256.Create();
             _configuration = configuration;
-            _secret = _configuration["ENCRYPTOR_SECRET"];
+            _secret = _configuration["Security:Encryptor_Secret"];
         }
 
 

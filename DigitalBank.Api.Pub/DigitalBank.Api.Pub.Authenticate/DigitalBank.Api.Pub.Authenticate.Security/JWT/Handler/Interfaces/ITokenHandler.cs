@@ -5,6 +5,6 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler.Interfaces
 {
     public interface ITokenHandler
     {
-        Task<TokenModel> CreateJwtToken(dynamic user);
+        Task<TokenModel> CreateJwtToken(dynamic user,string permissions);
     }
 }

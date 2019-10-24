@@ -17,8 +17,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Models.Permission
         [Column("created_at")]
         public DateTime CreatedDate { get; set; }
 
-
         [Column("customer_id")]
-        public virtual Customer.Customer Customer { get; set; }
+        public int CustomerId{ get; set; }
     }
 }

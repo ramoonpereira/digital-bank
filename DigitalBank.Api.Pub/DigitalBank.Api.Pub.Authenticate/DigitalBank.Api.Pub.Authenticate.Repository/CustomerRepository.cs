@@ -18,7 +18,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Repository.DbContext
         {
             return Task.Run(() =>
             {
-                return _appDbContext.Customers.Include(customer => customer.Permissions).Where(c => c.Email.Equals(email)).FirstOrDefault();
+                return _appDbContext.Customers.Where(c => c.Email.Equals(email)).FirstOrDefault();
             }
             );
         }

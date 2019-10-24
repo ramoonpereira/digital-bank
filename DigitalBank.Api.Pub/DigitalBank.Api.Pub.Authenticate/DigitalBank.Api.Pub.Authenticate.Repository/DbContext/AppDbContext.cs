@@ -1,4 +1,5 @@
 ﻿using DigitalBank.Api.Pub.Authenticate.Business.Models.Customer;
+using DigitalBank.Api.Pub.Authenticate.Business.Models.Permission;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBank.Api.Pub.Authenticate.Repository.DbContext
@@ -9,5 +10,6 @@ namespace DigitalBank.Api.Pub.Authenticate.Repository.DbContext
         {
         }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
     }
 }

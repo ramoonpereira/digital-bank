@@ -32,9 +32,9 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<TokenModel> CreateJwtToken(dynamic user)
+        public async Task<TokenModel> CreateJwtToken(dynamic user,string permissions)
         {
-            var identity = await GetIdentity(user);
+            var identity = await GetIdentity(user, permissions);
             var claims = await CreateClaims(identity, user);
             var jwt = CreateJwtSecurityToken(claims);
             var token = handler.WriteToken(jwt);
@@ -43,7 +43,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
             {
                 TokenType = "Bearer",
                 AccessToken = token,
-                ExpiresIn = (int)jwt.expires.TotalSeconds,
+                ExpiresIn = jwt.ValidTo,
                 CreatedDate = DateTime.Now,
                 User = user
             };
@@ -54,19 +54,19 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        private Task<ClaimsIdentity> GetIdentity(dynamic user)
+        private Task<ClaimsIdentity> GetIdentity(dynamic user, string permissions)
         {
             var identity = new ClaimsIdentity(
-                new GenericIdentity(user.document),
+                new GenericIdentity(user.Document.ToString()),
                 new[] {
                     new Claim("Id", user.Id.ToString()),
                     new Claim("Name", user.Name),
-                    new Claim("Document", user.Document),
+                    new Claim("Document", user.Document.ToString()),
                     new Claim("Email", user.Email)
                 }
             );
 
-            foreach (var role in user.Permissions.Split(','))
+            foreach (var role in permissions.Split(','))
             {
                 identity.AddClaim(new Claim(ClaimTypes.Role, role));
             }

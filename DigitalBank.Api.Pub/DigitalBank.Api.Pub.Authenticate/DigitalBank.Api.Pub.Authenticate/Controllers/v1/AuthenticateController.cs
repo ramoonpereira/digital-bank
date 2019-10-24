@@ -21,7 +21,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Controllers.v1
         public AuthenticateController(IAuthenticateBusiness authenticateBusiness, IMapper mapper)
         {
             _authenticateBusiness = authenticateBusiness;
-            _mapper = _mapper;
+            _mapper = mapper;
 
         }
 
@@ -31,7 +31,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Controllers.v1
         /// <param name="login">Objeto de autenticação. O cliente poderá entrar com o e-mail cadastrado</param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpPost("Login")]
+        [HttpPost("login")]
         [Produces("application/json")]
         public async Task<IActionResult> Login([FromBody]LoginRequestDTO login)
         {

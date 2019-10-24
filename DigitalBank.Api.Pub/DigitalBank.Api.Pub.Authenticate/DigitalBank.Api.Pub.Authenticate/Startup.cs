@@ -11,6 +11,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace DigitalBank.Api.Pub.Authenticate
 {
@@ -40,7 +42,13 @@ namespace DigitalBank.Api.Pub.Authenticate
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                                 .RequireAuthenticatedUser()
+                                 .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
             services.RegisterWebApiServices(Configuration);
             services.RegisterDatabase(Configuration);
         }
@@ -52,19 +60,13 @@ namespace DigitalBank.Api.Pub.Authenticate
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            // global cors policy
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
+            app.UseMvc();
             app.UseAuthentication();
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -72,7 +74,6 @@ namespace DigitalBank.Api.Pub.Authenticate
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", Configuration["Application:Title"]);
             });
 
-            app.UseMvc();
         }
     }
 }

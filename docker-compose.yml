@@ -1,62 +1,26 @@
 version: '3.4'
 
-services:
-
-  mysql:
-    image: mysql:latest
-    container_name: mysql
-    secrets:
-     - MYSQL_ROOT_PASSWORD
-     - MYSQL_DATABASE
-     - MYSQL_USER
-     - MYSQL_PASSWORD
+services: 
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
     environment:
-      MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-      MYSQL_DATABASE: MYSQL_DATABASE
-      MYSQL_USER: MYSQL_USER
-      MYSQL_PASSWORD: MYSQL_PASSWORD
+      MYSQL_ROOT_PASSWORD: digitalbank
+      MYSQL_DATABASE: digitalbank
+      MYSQL_USER: digitalbank
+      MYSQL_PASSWORD: '!@12QWqw'
     ports:
-      - '3307:3307'
-    network_mode: "bridge"
-      
+      - '3306:3306'     
+ 
   rabbitmq:
-    image: rabbitmq:latest
+    image: rabbitmq:3-management
     container_name: rabbitmq
     hostname: rabbitmq
-    volumes:
-     - $PWD/storage/rabbitmq:/var/lib/rabbitmq
-    secrets:
-     - RABBITMQ_ERLANG_COOKIE
-     - RABBITMQ_DEFAULT_USER
-     - RABBITMQ_DEFAULT_PASS
-    environment:
-      RABBITMQ_ERLANG_COOKIE: RABBITMQ_ERLANG_COOKIE
-      RABBITMQ_DEFAULT_USER: RABBITMQ_DEFAULT_USER
-      RABBITMQ_DEFAULT_PASS: RABBITMQ_DEFAULT_PASS
     ports:
       - '15672:15672'
-    network_mode: "bridge"
-
-secrets:
-  MYSQL_ROOT_PASSWORD:
-    file: ./secrets/MYSQL_ROOT_PASSWORD
-  MYSQL_DATABASE:
-    file: ./secrets/MYSQL_DATABASE
-  MYSQL_USER:
-    file: ./secrets/MYSQL_USER
-  MYSQL_PASSWORD:
-    file: ./secrets/MYSQL_PASSWORD
-  MYSQL_CONNECTIONSTRING:
-    file: ./secrets/MYSQL_CONNECTIONSTRING
-  RABBITMQ_ERLANG_COOKIE:
-    file: ./secrets/RABBITMQ_ERLANG_COOKIE
-  RABBITMQ_DEFAULT_USER:
-    file: ./secrets/RABBITMQ_DEFAULT_USER
-  RABBITMQ_DEFAULT_PASS:
-    file: ./secrets/RABBITMQ_DEFAULT_PASS
-  JWT_SECRET:
-    file: ./secrets/JWT_SECRET
-  JWT_EXPIREHOURS:
-    file: ./secrets/JWT_EXPIREHOURS
-  ENCRYPTOR_SECRET:
-    file: ./secrets/ENCRYPTOR_SECRET
+    volumes:
+     - $PWD/storage/rabbitmq:/var/lib/rabbitmq
+    environment:
+     - RABBITMQ_ERLANG_COOKIE=digitalbank
+     - RABBITMQ_DEFAULT_USER=digitalbank
+     - RABBITMQ_DEFAULT_PASS='!@12QWqw'

@@ -22,20 +22,18 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Models.Customer
         public string Password { get; set; }
 
         [Column("phone")]
-        public int Phone { get; set; }
+        public long Phone { get; set; }
 
         [Column("birth_date")]
         public DateTime BirthDate { get; set; }
 
         [Column("document")]
-        public int Document { get; set; }
+        public long Document { get; set; }
 
         [Column("status")]
         public bool Status { get; set; }
 
         [Column("created_at")]
         public DateTime CreatedDate { get; set; }
-
-        public virtual List<Permission.Permission> Permissions { get; set; }
     }
 }

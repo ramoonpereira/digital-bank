@@ -3,6 +3,7 @@ using DigitalBank.Api.Pub.Authenticate.Business.Implementations;
 using DigitalBank.Api.Pub.Authenticate.Business.Interfaces;
 using DigitalBank.Api.Pub.Authenticate.Business.Repository;
 using DigitalBank.Api.Pub.Authenticate.Infrastructure.AutoMapper;
+using DigitalBank.Api.Pub.Authenticate.Repository;
 using DigitalBank.Api.Pub.Authenticate.Repository.DbContext;
 using DigitalBank.Api.Pub.Authenticate.Security.Encryptor.Handler;
 using DigitalBank.Api.Pub.Authenticate.Security.Encryptor.Handler.Interfaces;
@@ -55,12 +56,12 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
                 {
                     options.IncludeXmlComments(xmlDocumentPath);
                 }
-
+                options.DescribeAllEnumsAsStrings();
             });
             #endregion
 
             #region JWT
-            var key = Encoding.ASCII.GetBytes(configuration["JWT_SECRET"]);
+            var key = Encoding.ASCII.GetBytes(configuration["Security:JwtSecret"]);
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -93,7 +94,8 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
             #region Application
 
             #region Repository
-            services.AddSingleton<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
             #endregion
 
             #region Handler
@@ -104,6 +106,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
             #region Business
             services.AddScoped<IAuthenticateBusiness, AuthenticateBusiness>();
             services.AddScoped<ICustomerBusiness, CustomerBusiness>();
+            services.AddScoped<IPermissionBusiness, PermissionBusiness>();
             #endregion
 
             #endregion
@@ -113,7 +116,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
 
         public static IServiceCollection RegisterDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration["MYSQL_CONNECTIONSTRING"];
+            var connectionString = configuration["MySQL:Connection"];
 
             services.AddDbContext<AppDbContext>(options =>
                options.UseMySql(connectionString));

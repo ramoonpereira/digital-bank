@@ -3,9 +3,9 @@ CREATE TABLE IF NOT EXISTS customers (
     name VARCHAR(255) NOT NULL,
     email  VARCHAR(255) NOT NULL,
 	password TEXT NOT NULL,
-    phone INT NOT NULL,
-	birth_date DATE INT NOT NULL,
-	document INT NOT NULL,
+    phone BIGINT NOT NULL,
+	birth_date DATE NOT NULL,
+	document BIGINT NOT NULL,
     status BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )  ENGINE=INNODB;

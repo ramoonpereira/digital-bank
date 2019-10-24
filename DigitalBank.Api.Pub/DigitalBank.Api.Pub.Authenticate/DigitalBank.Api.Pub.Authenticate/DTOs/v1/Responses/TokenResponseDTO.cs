@@ -11,7 +11,7 @@ namespace DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses
         public CustomerResponseDTO User { get; set; }
         public string AccessToken { get; set; }
         public string TokenType { get; set; }
-        public long ExpiresIn { get; set; }
+        public DateTime ExpiresIn { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

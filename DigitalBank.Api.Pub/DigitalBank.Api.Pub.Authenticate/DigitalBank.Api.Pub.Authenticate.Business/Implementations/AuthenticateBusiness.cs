@@ -12,12 +12,15 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Implementations
     public class AuthenticateBusiness : IAuthenticateBusiness
     {
         private ICustomerBusiness _customerBusiness;
+        private IPermissionBusiness _permissionBusiness;
         private IEncryptorHandler _encryptorHandler;
         private ITokenHandler _tokenHandler;
 
-        public AuthenticateBusiness(ICustomerBusiness customerBusiness, IEncryptorHandler encryptorHandler, ITokenHandler tokenHandler)
+        public AuthenticateBusiness(ICustomerBusiness customerBusiness, IEncryptorHandler encryptorHandler,
+                                    ITokenHandler tokenHandler, IPermissionBusiness permissionBusiness)
         {
             _customerBusiness = customerBusiness;
+            _permissionBusiness = permissionBusiness;
             _encryptorHandler = encryptorHandler;
             _tokenHandler = tokenHandler;
         }
@@ -31,7 +34,9 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Implementations
 
             await ValidateSamePasswordAsync(login.Password, customer.Password);
 
-            return await _tokenHandler.CreateJwtToken(customer);
+            string permissions = await _permissionBusiness.GetPermissionByCustomerIdAsync(customer.Id);
+
+            return await _tokenHandler.CreateJwtToken(customer, permissions);
         }
 
         private async Task ValidateSamePasswordAsync(string password, string passwordDb)
