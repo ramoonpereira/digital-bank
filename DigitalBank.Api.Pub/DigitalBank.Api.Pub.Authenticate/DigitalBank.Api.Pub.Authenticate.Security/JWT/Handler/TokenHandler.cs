@@ -15,7 +15,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
     {
         private IConfiguration _configuration;
         private AuthorizeOptions _options;
-        private JwtSecurityTokenHandler handler;
+        private JwtSecurityTokenHandler _handler;
 
         /// <summary>
         /// 
@@ -24,7 +24,8 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
         {
             _options = options.Value;
             _configuration = configuration;
-            handler = new JwtSecurityTokenHandler();
+            _handler = new JwtSecurityTokenHandler();
+            _options.ValidFor = TimeSpan.FromHours(Convert.ToDouble(_configuration["JWT_EXPIREHOURS"]));
         }
 
         /// <summary>
@@ -32,22 +33,35 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public async Task<TokenModel> CreateJwtToken(dynamic user,string permissions)
+        public async Task<TokenModel> CreateJwtToken(dynamic user, string permissions)
         {
             var identity = await GetIdentity(user, permissions);
             var claims = await CreateClaims(identity, user);
             var jwt = CreateJwtSecurityToken(claims);
-            var token = handler.WriteToken(jwt);
+            var token = _handler.WriteToken(jwt);
 
             return new TokenModel
             {
                 TokenType = "Bearer",
                 AccessToken = token,
-                ExpiresIn = jwt.ValidTo,
+                ExpiresIn = DateTime.Now.AddHours(_options.ValidFor.TotalHours),
                 CreatedDate = DateTime.Now,
                 User = user
             };
         }
+
+        /// <summary>
+        /// Decoda o token
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public Task<JwtSecurityToken> DecodeJwtToken(string accessToken)
+        {
+            var token = _handler.ReadJwtToken(accessToken);
+
+            return Task.FromResult(token);
+        }
+
 
         /// <summary>
         /// Autentica o usuário e valida o acesso
@@ -57,11 +71,10 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
         private Task<ClaimsIdentity> GetIdentity(dynamic user, string permissions)
         {
             var identity = new ClaimsIdentity(
-                new GenericIdentity(user.Document.ToString()),
+                new GenericIdentity(user.Name, "Customer"),
                 new[] {
                     new Claim("Id", user.Id.ToString()),
                     new Claim("Name", user.Name),
-                    new Claim("Document", user.Document.ToString()),
                     new Claim("Email", user.Email)
                 }
             );
@@ -85,7 +98,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Name),
                 new Claim(JwtRegisteredClaimNames.Jti, await _options.JtiGenerator()),
-                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(DateTime.UtcNow).ToString(), ClaimValueTypes.Integer64)
+                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(_options.CreatedOn).ToString(), ClaimValueTypes.Integer64)
             };
 
             foreach (var item in identity.Claims)
@@ -108,19 +121,14 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
                   audience: _options.Audience,
                   claims: claims,
                   notBefore: _options.NotBefore,
-                  expires: GenerateExperation(),
+                  expires: _options.Expiration,
                   signingCredentials: _options.SigningCredentials
                 );
 
             return securityToken;
         }
 
-        private DateTime GenerateExperation()
-        {
-            return DateTime.UtcNow.Add(TimeSpan.FromHours(Convert.ToDouble(_configuration["JWT_EXPIREHOURS"])));
-        }
-
         private static long ToUnixEpochDate(DateTime date)
-            => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+         => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
     }
 }

@@ -41,9 +41,9 @@ namespace DigitalBank.Api.Pub.Authenticate.Controllers.v1
         [ProducesResponseType(typeof(TokenResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> Login([FromBody]LoginRequestDTO login)
+        public async Task<IActionResult> LoginAsync([FromBody]LoginRequestDTO login)
         {
-            TokenModel token = await _authenticateBusiness.LoginAsync(_mapper.Map<Login>(login));
+            TokenModel token = await _authenticateBusiness.LoginAsync(_mapper.Map<LoginModel>(login));
             TokenResponseDTO response = _mapper.Map<TokenResponseDTO>(token);
 
             return Ok(response);

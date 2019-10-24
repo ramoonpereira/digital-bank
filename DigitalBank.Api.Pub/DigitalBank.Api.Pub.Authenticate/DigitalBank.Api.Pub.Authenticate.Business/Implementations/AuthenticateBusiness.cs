@@ -25,9 +25,9 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Implementations
             _tokenHandler = tokenHandler;
         }
 
-        public async Task<TokenModel> LoginAsync(Login login)
+        public async Task<TokenModel> LoginAsync(LoginModel login)
         {
-            Customer customer = await _customerBusiness.GetCustomerByEmailAsync(login.Email);
+            CustomerModel customer = await _customerBusiness.GetCustomerByEmailAsync(login.Email);
 
             if (customer == null)
                 throw new KeyNotFoundException("Usuário ou senha inválidos");

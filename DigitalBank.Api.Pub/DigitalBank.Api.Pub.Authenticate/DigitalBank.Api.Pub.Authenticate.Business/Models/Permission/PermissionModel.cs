@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DigitalBank.Api.Pub.Authenticate.Business.Models.Permission
 {
     [Table("customer_permissions")]
-    public class Permission
+    public class PermissionModel
     {
         [Key]
         [Column("id")]

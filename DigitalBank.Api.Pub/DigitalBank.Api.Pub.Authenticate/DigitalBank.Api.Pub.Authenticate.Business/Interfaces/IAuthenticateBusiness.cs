@@ -7,6 +7,6 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Interfaces
 {
     public interface IAuthenticateBusiness
     {
-        Task<TokenModel> LoginAsync(Login login);
+        Task<TokenModel> LoginAsync(LoginModel login);
     }
 }

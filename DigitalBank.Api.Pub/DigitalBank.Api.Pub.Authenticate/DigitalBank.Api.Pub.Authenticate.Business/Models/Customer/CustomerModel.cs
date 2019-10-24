@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DigitalBank.Api.Pub.Authenticate.Business.Models.Customer
 {
     [Table("customers")]
-    public class Customer
+    public class CustomerModel
     {
         [Key]
         [Column("id")]

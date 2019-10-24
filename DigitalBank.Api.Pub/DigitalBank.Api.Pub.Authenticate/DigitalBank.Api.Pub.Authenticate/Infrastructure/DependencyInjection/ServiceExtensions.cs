@@ -7,6 +7,7 @@ using DigitalBank.Api.Pub.Authenticate.Repository;
 using DigitalBank.Api.Pub.Authenticate.Repository.DbContext;
 using DigitalBank.Api.Pub.Authenticate.Security.Encryptor.Handler;
 using DigitalBank.Api.Pub.Authenticate.Security.Encryptor.Handler.Interfaces;
+using DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler;
 using DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -39,15 +40,6 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
                         Description = configuration["Application:Description"]
                     });
 
-                options.AddSecurityDefinition("bearer",
-                    new ApiKeyScheme
-                    {
-                        In = "header",
-                        Description = "Autenticação baseada em Json Web Token (JWT)",
-                        Name = "Authorization",
-                        Type = "apiKey"
-                    });
-
                 var applicationBasePath = PlatformServices.Default.Application.ApplicationBasePath;
                 var applicationName = PlatformServices.Default.Application.ApplicationName;
                 var xmlDocumentPath = Path.Combine(applicationBasePath, $"{applicationName}.xml");
@@ -61,23 +53,26 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
             #endregion
 
             #region JWT
-            var key = Encoding.ASCII.GetBytes(configuration["Security:JwtSecret"]);
-            services.AddAuthentication(x =>
+            string secret = configuration["Security:JwtSecret"];
+            SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
+            var tokenOptions = configuration.GetSection(nameof(AuthorizeOptions));
+            var tokenValidationParameters = new TokenValidationParametersBuilder(tokenOptions, signingKey)
+                .Build();
+
+            services.Configure<AuthorizeOptions>(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
+                options.Issuer = tokenOptions[nameof(AuthorizeOptions.Issuer)];
+                options.Audience = tokenOptions[nameof(AuthorizeOptions.Audience)];
+                options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            services.AddAuthentication(o =>
             {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
+                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = tokenValidationParameters;
             });
             #endregion
 

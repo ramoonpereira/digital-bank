@@ -17,8 +17,8 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.AutoMapper
         /// </summary>
         public MappingProfile()
         {
-            CreateMap<Login, LoginRequestDTO>().ReverseMap();
-            CreateMap<Customer, CustomerResponseDTO>().ReverseMap();
+            CreateMap<LoginModel, LoginRequestDTO>().ReverseMap();
+            CreateMap<CustomerModel, CustomerResponseDTO>().ReverseMap();
             CreateMap<TokenModel, TokenResponseDTO>().ReverseMap();
         }
     }

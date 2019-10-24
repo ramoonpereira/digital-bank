@@ -14,7 +14,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Repository.DbContext
             _appDbContext = appDbContext;
         }
 
-        public Task<Customer> GetCustomerByEmailAsync(string email)
+        public Task<CustomerModel> GetCustomerByEmailAsync(string email)
         {
             return Task.Run(() =>
             {

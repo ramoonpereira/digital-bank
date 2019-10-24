@@ -17,7 +17,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Implementations
 
         public async Task<string> GetPermissionByCustomerIdAsync(int customerId)
         {
-            List<Permission> permissions = await _permissionRepository.GetPermissionByCustomerIdAsync(customerId);
+            List<PermissionModel> permissions = await _permissionRepository.GetPermissionByCustomerIdAsync(customerId);
 
             string permissionsJoin = permissions.Any() ? string.Join(',', permissions.Select(p => p.Permissions)) : "";
 

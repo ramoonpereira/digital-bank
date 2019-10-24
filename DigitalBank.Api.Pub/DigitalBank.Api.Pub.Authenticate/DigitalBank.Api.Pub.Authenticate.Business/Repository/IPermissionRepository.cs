@@ -8,6 +8,6 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Repository
 {
     public interface IPermissionRepository
     {
-        Task<List<Permission>> GetPermissionByCustomerIdAsync(int customerId);
+        Task<List<PermissionModel>> GetPermissionByCustomerIdAsync(int customerId);
     }
 }

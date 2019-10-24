@@ -13,7 +13,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Implementations
             _customerRepository = customerRepository;
         }
 
-        public async Task<Customer> GetCustomerByEmailAsync(string email)
+        public async Task<CustomerModel> GetCustomerByEmailAsync(string email)
         {
             return await _customerRepository.GetCustomerByEmailAsync(email);
         }

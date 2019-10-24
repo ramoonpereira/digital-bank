@@ -5,6 +5,6 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Repository
 {
     public interface ICustomerRepository
     {
-        Task<Customer> GetCustomerByEmailAsync(string email);
+        Task<CustomerModel> GetCustomerByEmailAsync(string email);
     }
 }

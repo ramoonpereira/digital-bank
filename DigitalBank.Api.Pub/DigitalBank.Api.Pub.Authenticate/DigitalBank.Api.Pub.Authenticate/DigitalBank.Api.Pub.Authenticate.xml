@@ -4,7 +4,7 @@
         <name>DigitalBank.Api.Pub.Authenticate</name>
     </assembly>
     <members>
-        <member name="M:DigitalBank.Api.Pub.Authenticate.Controllers.v1.AuthenticateController.Login(DigitalBank.Api.Pub.Authenticate.DTOs.v1.Requests.LoginRequestDTO)">
+        <member name="M:DigitalBank.Api.Pub.Authenticate.Controllers.v1.AuthenticateController.LoginAsync(DigitalBank.Api.Pub.Authenticate.DTOs.v1.Requests.LoginRequestDTO)">
             <summary>
             Autentica o cliente
             </summary>

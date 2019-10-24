@@ -1,0 +1,73 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.452
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiResources", "ApiResources", "{6E1189EF-F474-4ED3-8F21-C21B6A206958}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{749ED164-CCF1-4D0F-8FD5-BC3DF9304C7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repository", "Repository", "{84DF98FA-F390-43A7-A9D8-E20468BFE378}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1E115B3C-3923-4C23-86DF-D0452CEE8412}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{E0689A24-0DE0-408D-BD90-854D5D0BD8D9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Pub.DigitalAccount", "DigitalBank.Api.Pub.DigitalAccount\DigitalBank.Api.Pub.DigitalAccount.csproj", "{10CC1C45-2FF0-4983-82B5-BA701FDB58B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Pub.DigitalAccount.Business", "DigitalBank.Api.Pub.DigitalAccount.Business\DigitalBank.Api.Pub.DigitalAccount.Business.csproj", "{CDD624B9-AD7A-4858-85F1-1B3C052E2B59}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Pub.DigitalAccount.Repository", "DigitalBank.Api.Pub.DigitalAccount.Repository\DigitalBank.Api.Pub.DigitalAccount.Repository.csproj", "{F389D63D-AB83-4535-ABE6-032F9FA65604}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Pub.DigitalAccount.Security", "DigitalBank.Api.Pub.DigitalAccount.Security\DigitalBank.Api.Pub.DigitalAccount.Security.csproj", "{0E4AB5BA-CF02-47CD-846B-D8D0CDA6869F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Pub.DigitalAccount.Business.Test", "DigitalBank.Api.Pub.DigitalAccount.Business.Test\DigitalBank.Api.Pub.DigitalAccount.Business.Test.csproj", "{1CBD8307-99F0-4E33-B875-BE79EB0AD12E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DigitalBank.Api.Pub.DigitalAccount.Test", "DigitalBank.Api.Pub.DigitalAccount.Test\DigitalBank.Api.Pub.DigitalAccount.Test.csproj", "{9F08D953-2DF5-45B5-B6D4-8B938F631F03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10CC1C45-2FF0-4983-82B5-BA701FDB58B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10CC1C45-2FF0-4983-82B5-BA701FDB58B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10CC1C45-2FF0-4983-82B5-BA701FDB58B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10CC1C45-2FF0-4983-82B5-BA701FDB58B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD624B9-AD7A-4858-85F1-1B3C052E2B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD624B9-AD7A-4858-85F1-1B3C052E2B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD624B9-AD7A-4858-85F1-1B3C052E2B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD624B9-AD7A-4858-85F1-1B3C052E2B59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F389D63D-AB83-4535-ABE6-032F9FA65604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F389D63D-AB83-4535-ABE6-032F9FA65604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F389D63D-AB83-4535-ABE6-032F9FA65604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F389D63D-AB83-4535-ABE6-032F9FA65604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4AB5BA-CF02-47CD-846B-D8D0CDA6869F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4AB5BA-CF02-47CD-846B-D8D0CDA6869F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4AB5BA-CF02-47CD-846B-D8D0CDA6869F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4AB5BA-CF02-47CD-846B-D8D0CDA6869F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CBD8307-99F0-4E33-B875-BE79EB0AD12E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CBD8307-99F0-4E33-B875-BE79EB0AD12E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CBD8307-99F0-4E33-B875-BE79EB0AD12E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CBD8307-99F0-4E33-B875-BE79EB0AD12E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F08D953-2DF5-45B5-B6D4-8B938F631F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F08D953-2DF5-45B5-B6D4-8B938F631F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F08D953-2DF5-45B5-B6D4-8B938F631F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F08D953-2DF5-45B5-B6D4-8B938F631F03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10CC1C45-2FF0-4983-82B5-BA701FDB58B6} = {6E1189EF-F474-4ED3-8F21-C21B6A206958}
+		{CDD624B9-AD7A-4858-85F1-1B3C052E2B59} = {749ED164-CCF1-4D0F-8FD5-BC3DF9304C7A}
+		{F389D63D-AB83-4535-ABE6-032F9FA65604} = {84DF98FA-F390-43A7-A9D8-E20468BFE378}
+		{0E4AB5BA-CF02-47CD-846B-D8D0CDA6869F} = {E0689A24-0DE0-408D-BD90-854D5D0BD8D9}
+		{1CBD8307-99F0-4E33-B875-BE79EB0AD12E} = {1E115B3C-3923-4C23-86DF-D0452CEE8412}
+		{9F08D953-2DF5-45B5-B6D4-8B938F631F03} = {1E115B3C-3923-4C23-86DF-D0452CEE8412}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E95743DE-4CD5-45F0-80A1-D00C62CF24CE}
+	EndGlobalSection
+EndGlobal

@@ -16,7 +16,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Repository
             _appDbContext = appDbContext;
         }
 
-        public async Task<List<Permission>> GetPermissionByCustomerIdAsync(int customerId)
+        public async Task<List<PermissionModel>> GetPermissionByCustomerIdAsync(int customerId)
         {
             return await _appDbContext.Permissions.Where(c => c.CustomerId.Equals(customerId)).ToListAsync();
         }

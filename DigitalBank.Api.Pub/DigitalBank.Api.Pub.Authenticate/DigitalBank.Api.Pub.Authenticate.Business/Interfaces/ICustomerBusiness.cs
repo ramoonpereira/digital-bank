@@ -6,6 +6,6 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Interfaces
 {
     public interface ICustomerBusiness
     {
-        Task<Customer> GetCustomerByEmailAsync(string email);
+        Task<CustomerModel> GetCustomerByEmailAsync(string email);
     }
 }
