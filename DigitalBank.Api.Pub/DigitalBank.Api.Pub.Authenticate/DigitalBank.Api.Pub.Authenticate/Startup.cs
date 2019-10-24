@@ -68,8 +68,10 @@ namespace DigitalBank.Api.Pub.Authenticate
 
             app.UseCustomExceptionHandler();
 
-            app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

@@ -53,6 +53,11 @@ namespace DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection
             #endregion
 
             #region JWT
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DigitalBank-Pub", policy => policy.RequireClaim("Authorization", "Pub-DigitalBank"));
+            });
+
             string secret = configuration["Security:JwtSecret"];
             SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
             var tokenOptions = configuration.GetSection(nameof(AuthorizeOptions));

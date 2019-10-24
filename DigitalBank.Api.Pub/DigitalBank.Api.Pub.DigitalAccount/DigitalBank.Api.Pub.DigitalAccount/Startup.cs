@@ -61,15 +61,18 @@ namespace DigitalBank.Api.Pub.DigitalAccount
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseCustomExceptionHandler();
+
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            app.UseCustomExceptionHandler();
-
-            app.UseMvc();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseAuthentication();
+            app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

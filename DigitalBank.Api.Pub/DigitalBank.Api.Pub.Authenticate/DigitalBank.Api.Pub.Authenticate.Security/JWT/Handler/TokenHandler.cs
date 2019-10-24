@@ -25,7 +25,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
             _options = options.Value;
             _configuration = configuration;
             _handler = new JwtSecurityTokenHandler();
-            _options.ValidFor = TimeSpan.FromHours(Convert.ToDouble(_configuration["JWT_EXPIREHOURS"]));
+            _options.ValidFor = TimeSpan.FromHours(Convert.ToDouble(_configuration["Security:JwtExpireHours"]));
         }
 
         /// <summary>
@@ -71,8 +71,9 @@ namespace DigitalBank.Api.Pub.Authenticate.Security.JWT.Handler
         private Task<ClaimsIdentity> GetIdentity(dynamic user, string permissions)
         {
             var identity = new ClaimsIdentity(
-                new GenericIdentity(user.Name, "Customer"),
+                new GenericIdentity(user.Name, "Token"),
                 new[] {
+                    new Claim("Authorization", "Pub-DigitalBank"),
                     new Claim("Id", user.Id.ToString()),
                     new Claim("Name", user.Name),
                     new Claim("Email", user.Email)

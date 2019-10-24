@@ -29,6 +29,36 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Infrastructure.DependencyInjection
     {
         public static IServiceCollection RegisterWebApiServices(this IServiceCollection services, IConfiguration configuration)
         {
+
+            #region JWT
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("DigitalBank-Pub", policy => policy.RequireClaim("Authorization", "Pub-DigitalBank"));
+            });
+
+            string secret = configuration["Security:JwtSecret"];
+            SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
+            var tokenOptions = configuration.GetSection(nameof(AuthorizeOptions));
+            var tokenValidationParameters = new TokenValidationParametersBuilder(tokenOptions, signingKey)
+                .Build();
+
+            services.Configure<AuthorizeOptions>(options =>
+            {
+                options.Issuer = tokenOptions[nameof(AuthorizeOptions.Issuer)];
+                options.Audience = tokenOptions[nameof(AuthorizeOptions.Audience)];
+                options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
+            });
+
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = tokenValidationParameters;
+            });
+            #endregion
+
             #region Swagger
             services.AddSwaggerGen(options =>
             {
@@ -63,30 +93,6 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Infrastructure.DependencyInjection
                     options.IncludeXmlComments(xmlDocumentPath);
                 }
                 options.DescribeAllEnumsAsStrings();
-            });
-            #endregion
-
-            #region JWT
-            string secret = configuration["Security:JwtSecret"];
-            SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secret));
-            var tokenOptions = configuration.GetSection(nameof(AuthorizeOptions));
-            var tokenValidationParameters = new TokenValidationParametersBuilder(tokenOptions, signingKey)
-                .Build();
-
-            services.Configure<AuthorizeOptions>(options =>
-            {
-                options.Issuer = tokenOptions[nameof(AuthorizeOptions.Issuer)];
-                options.Audience = tokenOptions[nameof(AuthorizeOptions.Audience)];
-                options.SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256);
-            });
-
-            services.AddAuthentication(o =>
-            {
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
-            {
-                o.TokenValidationParameters = tokenValidationParameters;
             });
             #endregion
 

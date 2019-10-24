@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 
 namespace DigitalBank.Api.Pub.DigitalAccount.Controllers.v1
 {
-    [Authorize]
     [ApiController]
     [Route("digitalaccount/v1")]
     public class DigitalAccountController : Controller
@@ -48,6 +47,7 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Controllers.v1
         /// <returns></returns>
         //[Authorize(Roles = "pub-digitalaccount-r")]
         [HttpGet("{customerId}/bycustomer")]
+        [Authorize(Roles = "pub-digitalaccount-r")]
         [Produces("application/json")]
         [ProducesResponseType(typeof(DigitalAccountResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
