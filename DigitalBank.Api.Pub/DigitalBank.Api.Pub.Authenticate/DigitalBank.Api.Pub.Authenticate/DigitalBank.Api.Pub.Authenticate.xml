@@ -11,6 +11,56 @@
             <param name="login">Objeto de autenticação. O cliente poderá entrar com o e-mail cadastrado</param>
             <returns></returns>
         </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Requests.LoginRequestDTO.Email">
+            <summary>
+            Email (ex: example@example.com)
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Requests.LoginRequestDTO.Password">
+            <summary>
+            Senha
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.CustomerResponseDTO.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.CustomerResponseDTO.Name">
+            <summary>
+            Nome
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.CustomerResponseDTO.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.TokenResponseDTO.User">
+            <summary>
+            Usuario do Token
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.TokenResponseDTO.AccessToken">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.TokenResponseDTO.TokenType">
+            <summary>
+            Tipo do Token
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.TokenResponseDTO.ExpiresIn">
+            <summary>
+            Data Expiração
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Authenticate.DTOs.v1.Responses.TokenResponseDTO.CreatedDate">
+            <summary>
+            Data Criação
+            </summary>
+        </member>
         <member name="T:DigitalBank.Api.Pub.Authenticate.Infrastructure.AutoMapper.MappingProfile">
             <summary>
             
@@ -20,6 +70,48 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Authenticate.Infrastructure.Exceptions.ExceptionHandler.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary> 
+             
+            </summary> 
+            <param name="next"></param> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Authenticate.Infrastructure.Exceptions.ExceptionHandler.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="logger"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Authenticate.Infrastructure.Exceptions.ExceptionHandler.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Authenticate.Infrastructure.Exceptions.ExceptionHandler.WriteExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <param name="code"></param> 
+            <returns></returns> 
+        </member>
+        <member name="T:DigitalBank.Api.Pub.Authenticate.Infrastructure.Exceptions.ExceptionHandlerExtensions">
+            <summary> 
+             
+            </summary> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Authenticate.Infrastructure.Exceptions.ExceptionHandlerExtensions.UseCustomExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary> 
+             
+            </summary> 
+            <param name="builder"></param> 
         </member>
         <member name="T:DigitalBank.Api.Pub.Authenticate.Program">
             <summary>

@@ -30,7 +30,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Implementations
             Customer customer = await _customerBusiness.GetCustomerByEmailAsync(login.Email);
 
             if (customer == null)
-                throw new KeyNotFoundException("Usuario ou senha invalidos");
+                throw new KeyNotFoundException("Usuário ou senha inválidos");
 
             await ValidateSamePasswordAsync(login.Password, customer.Password);
 
@@ -42,7 +42,7 @@ namespace DigitalBank.Api.Pub.Authenticate.Business.Implementations
         private async Task ValidateSamePasswordAsync(string password, string passwordDb)
         {
             if (!await _encryptorHandler.CheckPassword(password, passwordDb))
-                throw new KeyNotFoundException("Usuario ou senha invalidos");
+                throw new KeyNotFoundException("Usuário ou senha inválidos");
         }
     }
 }

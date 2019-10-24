@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using DigitalBank.Api.Pub.Authenticate.Infrastructure.DependencyInjection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using DigitalBank.Api.Pub.Authenticate.Infrastructure.Exceptions;
 
 namespace DigitalBank.Api.Pub.Authenticate
 {
@@ -65,12 +66,14 @@ namespace DigitalBank.Api.Pub.Authenticate
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
+            app.UseCustomExceptionHandler();
+
             app.UseMvc();
             app.UseAuthentication();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.RoutePrefix = "swagger";
+                c.RoutePrefix = "";
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", Configuration["Application:Title"]);
             });
 
