@@ -19,5 +19,8 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Business.Models.CustomerPermission
 
         [Column("customer_id")]
         public int CustomerId { get; set; }
+
+        [Column("permission_id")]
+        public int PermissionId { get; set; }
     }
 }

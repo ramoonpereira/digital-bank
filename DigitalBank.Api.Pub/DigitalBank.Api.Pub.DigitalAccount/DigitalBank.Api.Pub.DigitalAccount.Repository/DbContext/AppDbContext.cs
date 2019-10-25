@@ -16,8 +16,40 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Repository.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PermissionModel>()
-              .Property(c => c.Type)
-              .HasConversion<int>();
+                .Property(c => c.Type)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<CustomerModel>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<CustomerPermissionModel>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<DigitalAccountModel>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<PermissionModel>()
+                .Property(b => b.Id)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<CustomerModel>()
+                .Property(b => b.CreatedDate)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<CustomerPermissionModel>()
+                .Property(b => b.CreatedDate)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<DigitalAccountModel>()
+                .Property(b => b.CreatedDate)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<PermissionModel>()
+                .Property(b => b.CreatedDate)
+                .ValueGeneratedOnAdd();
         }
 
         public DbSet<DigitalAccountModel> DigitalAccounts { get; set; }

@@ -36,8 +36,9 @@ namespace DigitalBank.Api.Pub.DigitalAccount.DTOs.v1.Requests
         /// Telefone - (DD999999999)
         /// </summary>
         [Required]
-        [MaxLength(11)]
-        [MinLength(10)]
+        [MaxLength(11, ErrorMessage = "Telefone deve possuir no minimo 10 e no maximo 11 caracteres.")]
+        [MinLength(10, ErrorMessage = "Telefone deve possuir no minimo 10 e no maximo 11 caracteres.")]
+        [RegularExpression("^[0-9]{10,11}$", ErrorMessage = "Telefone permitido somente números")]
         public string Phone { get; set; }
 
         /// <summary>
@@ -50,8 +51,9 @@ namespace DigitalBank.Api.Pub.DigitalAccount.DTOs.v1.Requests
         /// Documento Identidade - CPF (99999999999)
         /// </summary>
         [Required]
-        [MaxLength(11)]
-        [MinLength(11)]
+        [MaxLength(11, ErrorMessage = "Documento deve possuir 11 caracteres.")]
+        [MinLength(11, ErrorMessage = "Documento deve possuir 11 caracteres.")]
+        [RegularExpression("^[0-9]{11}$", ErrorMessage = "Documento permitido somente números")]
         public string Document { get; set; }
     }
 }

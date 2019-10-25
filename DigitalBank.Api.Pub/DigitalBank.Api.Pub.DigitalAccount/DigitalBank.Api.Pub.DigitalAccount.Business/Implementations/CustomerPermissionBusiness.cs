@@ -36,6 +36,7 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Business.Implementations
                 var customerPermission = new CustomerPermissionModel()
                 {
                     CustomerId = customerId,
+                    PermissionId = permission.Id,
                     Permissions = permission.Permissions,
                 };
 

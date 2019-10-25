@@ -75,7 +75,7 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Business.Implementations
         public async Task<DigitalAccountModel> GenerateNewDigitalAccountNumberAndDigit(DigitalAccountModel digitalAccount)
         {
             Random random = new Random();
-            digitalAccount.Number = random.Next(Int32.MinValue, Int32.MaxValue);
+            digitalAccount.Number = random.Next(1000, Int32.MaxValue);
             digitalAccount.Digit = 'X';
 
             bool exist = await ValidExistDigitalAccountNumberAndDigitAsync(digitalAccount.Number, digitalAccount.Digit);

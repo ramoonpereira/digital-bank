@@ -13,5 +13,5 @@ INSERT INTO digitalbank.customer_permissions
 VALUES(1, 1, 'pub-digitalaccount-r');
 
 INSERT INTO digitalbank.digital_account
-(number, digit, customer_id,balance,transfer_limit,status)
-VALUES(123, 'x', 1,100,500,1);
+(number, digit, customer_id,balance,transfer_limit_transaction,transfer_limit_transaction_day,status)
+VALUES(123, 'x', 1,100,500,2000,1);
