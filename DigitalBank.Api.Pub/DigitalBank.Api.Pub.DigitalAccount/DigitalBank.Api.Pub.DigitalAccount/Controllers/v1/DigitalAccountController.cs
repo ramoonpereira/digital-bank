@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DigitalBank.Api.Pub.DigitalAccount.Business.Interfaces;
+using DigitalBank.Api.Pub.DigitalAccount.Business.Models.Customer;
 using DigitalBank.Api.Pub.DigitalAccount.Business.Models.DigitalAccount;
+using DigitalBank.Api.Pub.DigitalAccount.DTOs.v1.Requests;
 using DigitalBank.Api.Pub.DigitalAccount.DTOs.v1.Responses;
 using DigitalBank.Api.Pub.DigitalAccount.Security.JWT.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -41,11 +43,30 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Controllers.v1
         }
 
         /// <summary>
+        /// Efetua criação da conta digital
+        /// </summary>
+        /// <param name="digitalAccountRequest">Dados de criação da conta digital</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(DigitalAccountResponseDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> CreateDigitalAccountAsync([FromBody]DigitalAccountRequestDTO digitalAccountRequest)
+        {
+            CustomerModel customer = _mapper.Map<CustomerModel>(digitalAccountRequest);
+            DigitalAccountModel digitalAccount = await _digitalAccountBusiness.InsertAsync(customer);
+            DigitalAccountResponseDTO response = _mapper.Map<DigitalAccountResponseDTO>(digitalAccount);
+
+            return Ok(response);
+        }
+
+        /// <summary>
         /// Busca conta digital do cliente
         /// </summary>
         /// <param name="customerId">Id do cliente da conta digital</param>
         /// <returns></returns>
-        //[Authorize(Roles = "pub-digitalaccount-r")]
         [HttpGet("{customerId}/bycustomer")]
         [Authorize(Roles = "pub-digitalaccount-r")]
         [Produces("application/json")]

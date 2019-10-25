@@ -3,6 +3,7 @@ using DigitalBank.Api.Pub.DigitalAccount.Business.Repository;
 using DigitalBank.Api.Pub.DigitalAccount.Repository.DbContext;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,15 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Repository
             await _appDbContext.SaveChangesAsync();
 
             return customer.Entity;
+        }
+
+        public Task<CustomerModel> GetCustomerByEmailAsync(string email)
+        {
+            return Task.Run(() =>
+            {
+                return _appDbContext.Customers.Where(c => c.Email.Equals(email)).FirstOrDefault();
+            }
+            );
         }
     }
 }

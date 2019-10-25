@@ -21,8 +21,11 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Business.Models.DigitalAccount
         [Column("balance")]
         public decimal Balance { get; set; }
 
-        [Column("transfer_limit")]
-        public decimal TransferLimit { get; set; }
+        [Column("transfer_limit_transaction")]
+        public decimal TransferLimitTransaction { get; set; }
+
+        [Column("transfer_limit_transaction_day")]
+        public decimal TransferLimitTransactionDay { get; set; }
 
         [Column("status")]
         public bool Status { get; set; }

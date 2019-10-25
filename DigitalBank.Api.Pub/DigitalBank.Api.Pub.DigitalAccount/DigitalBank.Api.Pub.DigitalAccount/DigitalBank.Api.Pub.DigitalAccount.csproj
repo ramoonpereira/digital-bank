@@ -36,8 +36,4 @@
     <ProjectReference Include="..\DigitalBank.Api.Pub.DigitalAccount.Security\DigitalBank.Api.Pub.DigitalAccount.Security.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\v1\Requests\" />
-  </ItemGroup>
-
 </Project>

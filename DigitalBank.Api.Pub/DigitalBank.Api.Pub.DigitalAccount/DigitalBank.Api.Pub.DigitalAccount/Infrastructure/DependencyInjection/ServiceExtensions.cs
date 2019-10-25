@@ -110,6 +110,9 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Infrastructure.DependencyInjection
 
             #region Repository
             services.AddScoped<IDigitalAccountRepository, DigitalAccountRepository>();
+            services.AddScoped<ICustomerPermissionRepository, CustomerPermissionRepository>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
             #endregion
 
             #region Handler
@@ -119,6 +122,9 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Infrastructure.DependencyInjection
 
             #region Business
             services.AddScoped<IDigitalAccountBusiness, DigitalAccountBusiness>();
+            services.AddScoped<ICustomerBusiness, CustomerBusiness>();
+            services.AddScoped<ICustomerPermissionBusiness, CustomerPermissionBusiness>();
+            services.AddScoped<IPermissionBusiness, PermissionBusiness>();
             #endregion
 
             #endregion
