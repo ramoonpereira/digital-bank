@@ -1,7 +1,5 @@
-﻿using DigitalBank.Api.Pub.Transaction.Business.Models.Customer;
-using DigitalBank.Api.Pub.Transaction.Business.Models.CustomerPermission;
-using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
-using DigitalBank.Api.Pub.Transaction.Business.Models.Permission;
+﻿using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
+using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalBank.Api.Pub.Transaction.Repository.DbContext
@@ -15,15 +13,19 @@ namespace DigitalBank.Api.Pub.Transaction.Repository.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PermissionModel>()
+            modelBuilder.Entity<DigitalAccountTransactionModel>()
                 .Property(c => c.Type)
                 .HasConversion<int>();
 
-            modelBuilder.Entity<CustomerModel>()
-                .Property(b => b.Id)
-                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<DigitalAccountTransactionModel>()
+                .Property(c => c.Operation)
+                .HasConversion<int>();
 
-            modelBuilder.Entity<CustomerPermissionModel>()
+            modelBuilder.Entity<DigitalAccountTransactionModel>()
+                .Property(c => c.Status)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<DigitalAccountTransactionModel>()
                 .Property(b => b.Id)
                 .ValueGeneratedOnAdd();
 
@@ -31,30 +33,16 @@ namespace DigitalBank.Api.Pub.Transaction.Repository.DbContext
                 .Property(b => b.Id)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<PermissionModel>()
-                .Property(b => b.Id)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<CustomerModel>()
-                .Property(b => b.CreatedDate)
-                .ValueGeneratedOnAdd();
-
-            modelBuilder.Entity<CustomerPermissionModel>()
-                .Property(b => b.CreatedDate)
-                .ValueGeneratedOnAdd();
-
             modelBuilder.Entity<DigitalAccountModel>()
                 .Property(b => b.CreatedDate)
                 .ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<PermissionModel>()
+            modelBuilder.Entity<DigitalAccountTransactionModel>()
                 .Property(b => b.CreatedDate)
                 .ValueGeneratedOnAdd();
         }
 
         public DbSet<DigitalAccountModel> DigitalAccounts { get; set; }
-        public DbSet<CustomerModel> Customers { get; set; }
-        public DbSet<CustomerPermissionModel> CustomerPermissions { get; set; }
-        public DbSet<PermissionModel> Permissions { get; set; }
+        public DbSet<DigitalAccountTransactionModel> DigitalAccountTransactions { get; set; }
     }
 }

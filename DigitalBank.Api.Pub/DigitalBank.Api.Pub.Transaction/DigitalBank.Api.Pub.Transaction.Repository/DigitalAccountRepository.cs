@@ -14,28 +14,12 @@ namespace DigitalBank.Api.Pub.Transaction.Repository.DbContext
             _appDbContext = appDbContext;
         }
 
-        public Task<DigitalAccountModel> GetDigitalAccountByCustomerIdAsync(int customerId)
+        public Task<DigitalAccountModel> GetByIdAsync(int id)
         {
             return Task.Run(() =>
             {
-                return _appDbContext.DigitalAccounts.Where(c => c.CustomerId.Equals(customerId)).FirstOrDefault();
+                return _appDbContext.DigitalAccounts.Where(c => c.Id.Equals(id)).FirstOrDefault();
             });
-        }
-        public Task<DigitalAccountModel> GetDigitalAccountByNumberAndDigitAsync(int number, char digit)
-        {
-            return Task.Run(() =>
-            {
-                return _appDbContext.DigitalAccounts.Where(c => c.Number.Equals(number) && c.Digit.Equals(digit)).FirstOrDefault();
-            });
-        }
-
-        public async Task<DigitalAccountModel> InsertAsync(DigitalAccountModel digitalAccount)
-        {
-            var newDigitalAccount = await _appDbContext.DigitalAccounts.AddAsync(digitalAccount);
-
-            await _appDbContext.SaveChangesAsync();
-
-            return newDigitalAccount.Entity;
         }
     }
 }
