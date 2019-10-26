@@ -22,19 +22,6 @@ namespace DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses
         /// </summary>
         public char Digit { get; set; }
 
-        /// <summary>
-        /// Saldo
-        /// </summary>
-        public decimal Balance { get; set; }
-
-        /// <summary>
-        /// Situação
-        /// </summary>
-        public bool Status { get; set; }
-
-        /// <summary>
-        /// Data de criação
-        /// </summary>
-        public DateTime CreatedDate { get; set; }
+        public CustomerResponseDTO Customer { get; set; }
     }
 }

@@ -10,8 +10,10 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Repository
     {
         Task<DigitalAccountTransactionModel> InsertAsync(DigitalAccountTransactionModel digitalAccountTransaction);
 
-        Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(DateTime startDate, DateTime endDate);
+        Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate);
 
-        Task<List<DigitalAccountTransactionModel>> GetTransactionsByDateAsync(DateTime date);
+        Task<List<DigitalAccountTransactionModel>> GetTransactionsEffectedByDateAsync(int digitalAccountId,DateTime date);
+
+        Task<DigitalAccountTransactionModel> GetByIdAsync(int transactionId);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
+using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction.Enum;
 using DigitalBank.Api.Pub.Transaction.Business.Repository;
 using DigitalBank.Api.Pub.Transaction.Repository.DbContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,16 +28,26 @@ namespace DigitalBank.Api.Pub.Transaction.Repository
             return newDigitalAccountTransaction.Entity;
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(DateTime startDate,DateTime endDate)
+        public async Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate)
         {
-
-            throw new NotImplementedException();
+            return await _appDbContext.DigitalAccountTransactions
+                                   .Where(c => c.CreatedDate.Date >= startDate.Date &&
+                                    c.CreatedDate.Date <= endDate.Date).ToListAsync();
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetTransactionsByDateAsync(DateTime date)
+        public async Task<List<DigitalAccountTransactionModel>> GetTransactionsEffectedByDateAsync(int digitalAccountId, DateTime date)
         {
+            return await _appDbContext.DigitalAccountTransactions
+                                      .Where(c => c.Status == TransactionStatusEnum.Effected &&
+                                       c.CreatedDate.Date == date.Date).ToListAsync();
+        }
 
-            throw new NotImplementedException();
+        public Task<DigitalAccountTransactionModel> GetByIdAsync(int transactionId)
+        {
+            return Task.Run(() =>
+            {
+                return _appDbContext.DigitalAccountTransactions.Where(c => c.Id.Equals(transactionId)).FirstOrDefault();
+            });
         }
     }
 }

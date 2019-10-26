@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DigitalBank.Api.Pub.Transaction.Business.Interfaces;
-using DigitalBank.Api.Pub.Transaction.Business.Models.Customer;
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
+using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
 using DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests;
 using DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses;
 using DigitalBank.Api.Pub.Transaction.Security.JWT.Model;
@@ -20,15 +20,15 @@ using System.Threading.Tasks;
 namespace DigitalBank.Api.Pub.Transaction.Controllers.v1
 {
     [ApiController]
-    [Route("digitalaccount/v1")]
+    [Route("transaction/v1")]
     public class DigitalAccountController : Controller
     {
-        private IDigitalAccountBusiness _digitalAccountBusiness;
+        private IDigitalAccountTransactionBusiness _digitalAccountTransactionBusiness;
         private IMapper _mapper;
         private string _accessToken;
-        public DigitalAccountController(IDigitalAccountBusiness digitalAccountBusiness, IMapper mapper)
+        public DigitalAccountController(IDigitalAccountTransactionBusiness digitalAccountTransactionBusiness, IMapper mapper)
         {
-            _digitalAccountBusiness = digitalAccountBusiness;
+            _digitalAccountTransactionBusiness = digitalAccountTransactionBusiness;
             _mapper = mapper;
 
         }
@@ -40,44 +40,87 @@ namespace DigitalBank.Api.Pub.Transaction.Controllers.v1
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             _accessToken = Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
+
+            if (!string.IsNullOrWhiteSpace(_accessToken))
+                _digitalAccountTransactionBusiness.Authorize(_accessToken).GetAwaiter();
         }
 
         /// <summary>
-        /// Efetua criação da conta digital
+        /// Efetua criação de uma transação de deposito
         /// </summary>
-        /// <param name="digitalAccountRequest">Dados de criação da conta digital</param>
+        /// <param name="transactionRequest">Dados de criação da transação</param>
         /// <returns></returns>
-        [HttpPost]
-        [AllowAnonymous]
+        [HttpPost("deposit")]
+        [Authorize(Roles = "pub-transaction-c")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(DigitalAccountResponseDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TransactionResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> CreateDigitalAccountAsync([FromBody]DigitalAccountRequestDTO digitalAccountRequest)
+        public async Task<IActionResult> CreateTransactionDepositAsync([FromBody]TransactionRequestDTO transactionRequest)
         {
-            CustomerModel customer = _mapper.Map<CustomerModel>(digitalAccountRequest);
-            DigitalAccountModel digitalAccount = await _digitalAccountBusiness.InsertAsync(customer);
-            DigitalAccountResponseDTO response = _mapper.Map<DigitalAccountResponseDTO>(digitalAccount);
+            DigitalAccountTransactionModel transaction = _mapper.Map<DigitalAccountTransactionModel>(transactionRequest);
+            DigitalAccountTransactionModel transactionResponse = await _digitalAccountTransactionBusiness.CreateTransactionDepositAsync(transaction);
+            TransactionResponseDTO response = _mapper.Map<TransactionResponseDTO>(transactionResponse);
 
             return Ok(response);
         }
 
         /// <summary>
-        /// Busca conta digital do cliente
+        /// Efetua criação de uma transação de transferencia entre contas
         /// </summary>
-        /// <param name="customerId">Id do cliente da conta digital</param>
+        /// <param name="transactionRequest">Dados de criação da transação</param>
         /// <returns></returns>
-        [HttpGet("{customerId}/bycustomer")]
-        [Authorize(Roles = "pub-digitalaccount-r")]
+        [HttpPost("transfer")]
+        [Authorize(Roles = "pub-transaction-c")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(DigitalAccountResponseDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TransactionResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetDigitalAccountByCustomerAsync([Required]int customerId)
+        public async Task<IActionResult> CreateTransactionTransferAsync([FromBody]TransactionRequestDTO transactionRequest)
         {
-            await _digitalAccountBusiness.Authorize(_accessToken);
-            DigitalAccountModel digitalAccount = await _digitalAccountBusiness.GetDigitalAccountByCustomerIdAsync(customerId);
-            DigitalAccountResponseDTO response = _mapper.Map<DigitalAccountResponseDTO>(digitalAccount);
+            DigitalAccountTransactionModel transaction = _mapper.Map<DigitalAccountTransactionModel>(transactionRequest);
+            DigitalAccountTransactionModel transactionResponse = await _digitalAccountTransactionBusiness.CreateTransactionTransferAsync(transaction);
+            TransactionResponseDTO response = _mapper.Map<TransactionResponseDTO>(transactionResponse);
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Busca uma transação da conta
+        /// </summary>
+        /// <param name="transactionId">Id da transação</param>
+        /// <returns></returns>
+        [HttpGet("{transactionId}")]
+        [Authorize(Roles = "pub-transaction-r")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(TransactionResponseDTO), StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetTransactionByIdAsync([Required]int transactionId)
+        {
+            DigitalAccountTransactionModel transaction = await _digitalAccountTransactionBusiness.GetByIdAsync(transactionId);
+            TransactionResponseDTO response = _mapper.Map<TransactionResponseDTO>(transaction);
+
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// Busca transações de uma conta digital por periodo
+        /// </summary>
+        /// <param name="digitalAccountId">Id da conta digital</param>
+        /// <param name="startDate">Data Inicial - Default 30 dias</param>
+        /// <param name="endDate">Data Final - Default Dia Atual</param>
+        /// <returns></returns>
+        [HttpGet("{digitalAccountId}/transactions")]
+        [Authorize(Roles = "pub-transaction-r")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(List<TransactionResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> GetAllTransactionsByPeriodAsync([Required]int digitalAccountId, [FromQuery]DateTime? startDate, [FromQuery]DateTime? endDate)
+        {
+            List<DigitalAccountTransactionModel> transactions =
+                await _digitalAccountTransactionBusiness.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate, endDate);
+
+            List<TransactionResponseDTO> response = _mapper.Map<List<TransactionResponseDTO>>(transactions);
 
             return Ok(response);
         }

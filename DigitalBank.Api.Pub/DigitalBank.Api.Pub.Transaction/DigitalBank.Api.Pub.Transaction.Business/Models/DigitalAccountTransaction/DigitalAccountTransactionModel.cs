@@ -33,6 +33,6 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransact
         public int DigitalAccountId { get; set; }
 
         [Column("digital_account_sender_id")]
-        public int DigitalAccountSenderId { get; set; }
+        public int? DigitalAccountSenderId { get; set; }
     }
 }
