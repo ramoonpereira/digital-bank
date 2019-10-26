@@ -21,12 +21,12 @@ namespace DigitalBank.Api.Pub.Transaction.Controllers.v1
 {
     [ApiController]
     [Route("transaction/v1")]
-    public class DigitalAccountController : Controller
+    public class TransactionController : Controller
     {
         private IDigitalAccountTransactionBusiness _digitalAccountTransactionBusiness;
         private IMapper _mapper;
         private string _accessToken;
-        public DigitalAccountController(IDigitalAccountTransactionBusiness digitalAccountTransactionBusiness, IMapper mapper)
+        public TransactionController(IDigitalAccountTransactionBusiness digitalAccountTransactionBusiness, IMapper mapper)
         {
             _digitalAccountTransactionBusiness = digitalAccountTransactionBusiness;
             _mapper = mapper;
@@ -56,7 +56,7 @@ namespace DigitalBank.Api.Pub.Transaction.Controllers.v1
         [ProducesResponseType(typeof(TransactionResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> CreateTransactionDepositAsync([FromBody]TransactionRequestDTO transactionRequest)
+        public async Task<IActionResult> CreateTransactionDepositAsync([FromBody]TransactionDepositRequestDTO transactionRequest)
         {
             DigitalAccountTransactionModel transaction = _mapper.Map<DigitalAccountTransactionModel>(transactionRequest);
             DigitalAccountTransactionModel transactionResponse = await _digitalAccountTransactionBusiness.CreateTransactionDepositAsync(transaction);
@@ -76,7 +76,7 @@ namespace DigitalBank.Api.Pub.Transaction.Controllers.v1
         [ProducesResponseType(typeof(TransactionResponseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ModelStateDictionary), StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> CreateTransactionTransferAsync([FromBody]TransactionRequestDTO transactionRequest)
+        public async Task<IActionResult> CreateTransactionTransferAsync([FromBody]TransactionTransferRequestDTO transactionRequest)
         {
             DigitalAccountTransactionModel transaction = _mapper.Map<DigitalAccountTransactionModel>(transactionRequest);
             DigitalAccountTransactionModel transactionResponse = await _digitalAccountTransactionBusiness.CreateTransactionTransferAsync(transaction);

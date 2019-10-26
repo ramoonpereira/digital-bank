@@ -21,17 +21,17 @@ namespace DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses
         /// <summary>
         /// Tipo
         /// </summary>
-        public TransactionTypeEnum Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// Operação
         /// </summary>
-        public TransactionOperationEnum Operation { get; set; }
+        public string Operation { get; set; }
 
         /// <summary>
         /// Situação
         /// </summary>
-        public TransactionStatusEnum Status { get; set; }
+        public string Status { get; set; }
 
         /// <summary>
         /// Data de criação

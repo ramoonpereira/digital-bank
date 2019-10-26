@@ -1,5 +1,4 @@
 ﻿using DigitalBank.Api.Pub.Transaction.Business.Interfaces;
-using DigitalBank.Api.Pub.Transaction.Business.Models.Customer;
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
 using DigitalBank.Api.Pub.Transaction.Business.Repository;
 using DigitalBank.Api.Pub.Transaction.Security.JWT.Handler.Interfaces;

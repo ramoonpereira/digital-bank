@@ -32,8 +32,15 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Repository
             return Task.Run(() =>
             {
                 return _appDbContext.Customers.Where(c => c.Email.Equals(email)).FirstOrDefault();
-            }
-            );
+            });
+        }
+
+        public Task<CustomerModel> GetCustomerByDocumentAsync(long document)
+        {
+            return Task.Run(() =>
+            {
+                return _appDbContext.Customers.Where(c => c.Document.Equals(document)).FirstOrDefault();
+            });
         }
     }
 }

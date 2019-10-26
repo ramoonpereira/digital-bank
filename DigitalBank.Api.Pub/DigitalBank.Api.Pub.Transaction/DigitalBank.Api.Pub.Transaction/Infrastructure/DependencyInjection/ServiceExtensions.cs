@@ -133,7 +133,8 @@ namespace DigitalBank.Api.Pub.Transaction.Infrastructure.DependencyInjection
             var connectionString = configuration["MySQL:Connection"];
 
             services.AddDbContext<AppDbContext>(options =>
-               options.UseMySql(connectionString));
+               options.UseLazyLoadingProxies()
+               .UseMySql(connectionString));
 
             return services;
         }

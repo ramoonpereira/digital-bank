@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DigitalBank.Api.Pub.Transaction</name>
+    </assembly>
+    <members>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Controllers.v1.TransactionController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
+            <summary> 
+            Recupera o Access token 
+            </summary> 
+            <param name="context"></param> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Controllers.v1.TransactionController.CreateTransactionDepositAsync(DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionDepositRequestDTO)">
+            <summary>
+            Efetua criação de uma transação de deposito
+            </summary>
+            <param name="transactionRequest">Dados de criação da transação</param>
+            <returns></returns>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Controllers.v1.TransactionController.CreateTransactionTransferAsync(DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionTransferRequestDTO)">
+            <summary>
+            Efetua criação de uma transação de transferencia entre contas
+            </summary>
+            <param name="transactionRequest">Dados de criação da transação</param>
+            <returns></returns>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Controllers.v1.TransactionController.GetTransactionByIdAsync(System.Int32)">
+            <summary>
+            Busca uma transação da conta
+            </summary>
+            <param name="transactionId">Id da transação</param>
+            <returns></returns>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Controllers.v1.TransactionController.GetAllTransactionsByPeriodAsync(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Busca transações de uma conta digital por periodo
+            </summary>
+            <param name="digitalAccountId">Id da conta digital</param>
+            <param name="startDate">Data Inicial - Default 30 dias</param>
+            <param name="endDate">Data Final - Default Dia Atual</param>
+            <returns></returns>
+        </member>
+        <member name="T:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.DigitalAccountRequestDTO">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.DigitalAccountRequestDTO.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionDepositRequestDTO.Value">
+            <summary>
+            Valor
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionDepositRequestDTO.DigitalAccountSender">
+            <summary>
+            Conta que esta enviando a transação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionDepositRequestDTO.DigitalAccountRecipient">
+            <summary>
+            Conta recebedora da transação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionTransferRequestDTO.Value">
+            <summary>
+            Valor
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionTransferRequestDTO.DigitalAccountSender">
+            <summary>
+            Conta que esta enviando a transação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.TransactionTransferRequestDTO.DigitalAccountRecipient">
+            <summary>
+            Conta recebedora da transação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.DigitalAccountResponseDTO.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.DigitalAccountResponseDTO.Number">
+            <summary>
+            Numero
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.DigitalAccountResponseDTO.Digit">
+            <summary>
+            Digito
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Value">
+            <summary>
+            Valor
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Type">
+            <summary>
+            Tipo
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Operation">
+            <summary>
+            Operação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Status">
+            <summary>
+            Situação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.CreatedDate">
+            <summary>
+            Data de criação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.DigitalAccount">
+            <summary>
+            Conta Recebedora
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses.TransactionResponseDTO.DigitalAccountSender">
+            <summary>
+            Conta Remetente
+            </summary>
+        </member>
+        <member name="T:DigitalBank.Api.Pub.Transaction.Infrastructure.AutoMapper.MappingProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Infrastructure.AutoMapper.MappingProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Infrastructure.Exceptions.ExceptionHandler.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary> 
+             
+            </summary> 
+            <param name="next"></param> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Infrastructure.Exceptions.ExceptionHandler.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="logger"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Infrastructure.Exceptions.ExceptionHandler.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Infrastructure.Exceptions.ExceptionHandler.WriteExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <param name="code"></param> 
+            <returns></returns> 
+        </member>
+        <member name="T:DigitalBank.Api.Pub.Transaction.Infrastructure.Exceptions.ExceptionHandlerExtensions">
+            <summary> 
+             
+            </summary> 
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Infrastructure.Exceptions.ExceptionHandlerExtensions.UseCustomExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary> 
+             
+            </summary> 
+            <param name="builder"></param> 
+        </member>
+        <member name="T:DigitalBank.Api.Pub.Transaction.Program">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DigitalBank.Api.Pub.Transaction.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:DigitalBank.Api.Pub.Transaction.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Pub.Transaction.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

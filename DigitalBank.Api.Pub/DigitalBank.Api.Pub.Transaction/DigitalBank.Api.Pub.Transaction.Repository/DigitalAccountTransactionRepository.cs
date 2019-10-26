@@ -31,14 +31,16 @@ namespace DigitalBank.Api.Pub.Transaction.Repository
         public async Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate)
         {
             return await _appDbContext.DigitalAccountTransactions
-                                   .Where(c => c.CreatedDate.Date >= startDate.Date &&
+                                   .Where(c => c.DigitalAccountId == digitalAccountId &&
+                                    c.CreatedDate.Date >= startDate.Date &&
                                     c.CreatedDate.Date <= endDate.Date).ToListAsync();
         }
 
         public async Task<List<DigitalAccountTransactionModel>> GetTransactionsEffectedByDateAsync(int digitalAccountId, DateTime date)
         {
             return await _appDbContext.DigitalAccountTransactions
-                                      .Where(c => c.Status == TransactionStatusEnum.Effected &&
+                                      .Where(c => c.DigitalAccountSenderId == digitalAccountId &&
+                                       c.Status == TransactionStatusEnum.Effected &&
                                        c.CreatedDate.Date == date.Date).ToListAsync();
         }
 

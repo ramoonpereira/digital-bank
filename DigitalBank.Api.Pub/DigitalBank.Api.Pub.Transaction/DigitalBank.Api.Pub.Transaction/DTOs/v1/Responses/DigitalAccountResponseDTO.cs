@@ -22,6 +22,5 @@ namespace DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses
         /// </summary>
         public char Digit { get; set; }
 
-        public CustomerResponseDTO Customer { get; set; }
     }
 }

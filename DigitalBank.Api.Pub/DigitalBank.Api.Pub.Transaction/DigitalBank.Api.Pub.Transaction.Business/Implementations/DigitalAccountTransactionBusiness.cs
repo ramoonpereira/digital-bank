@@ -33,75 +33,92 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
 
         public async Task<DigitalAccountTransactionModel> CreateTransactionDepositAsync(DigitalAccountTransactionModel transaction)
         {
-            if (transaction.DigitalAccountSenderId != null)
+            if (transaction.DigitalAccountSender != null)
                 await ProcessCustomerSenderDepositTransactionAsync(transaction);
 
-            DigitalAccountModel digitalAccount = await _digitalAccounBusiness.GetByIdAsync(transaction.DigitalAccountId);
+            DigitalAccountModel digitalAccount = await _digitalAccounBusiness.GetByIdAsync(transaction.DigitalAccount.Id);
 
             transaction = await CreateTransactionAsync(transaction, TransactionTypeEnum.Input,
-           TransactionOperationEnum.Deposit, transaction.DigitalAccountSenderId);
+           TransactionOperationEnum.Deposit, digitalAccount.Id, transaction.DigitalAccountSender?.Id);
+
+            transaction.DigitalAccount = digitalAccount;
 
             return transaction;
         }
 
         private async Task<DigitalAccountTransactionModel> ProcessCustomerSenderDepositTransactionAsync(DigitalAccountTransactionModel transaction)
         {
-            DigitalAccountTransactionModel transactionSender = await ProcessCustomerSenderTransactionAsync(transaction, TransactionOperationEnum.Deposit);
+            DigitalAccountModel digitalAccountSender = await _digitalAccounBusiness.GetByIdAsync(transaction.DigitalAccountSender.Id);
+
+            DigitalAccountTransactionModel transactionSender = await ProcessCustomerSenderTransactionAsync(transaction, TransactionOperationEnum.Deposit,
+                                                                                                           digitalAccountSender);
+            transactionSender.DigitalAccount = digitalAccountSender;
 
             return transactionSender;
         }
 
         public async Task<DigitalAccountTransactionModel> CreateTransactionTransferAsync(DigitalAccountTransactionModel transaction)
         {
-            if (transaction.DigitalAccountSenderId != null)
-                await ProcessCustomerSenderTransferTransactionAsync(transaction);
+            DigitalAccountTransactionModel transactionSender = await ProcessCustomerSenderTransferTransactionAsync(transaction);
 
-            DigitalAccountModel digitalAccount = await _digitalAccounBusiness.GetByIdAsync(transaction.DigitalAccountId);
+            DigitalAccountModel digitalAccount = await _digitalAccounBusiness.GetByIdAsync(transaction.DigitalAccount.Id);
 
             transaction = await CreateTransactionAsync(transaction, TransactionTypeEnum.Input,
-            TransactionOperationEnum.Transfer, transaction.DigitalAccountSenderId);
+            TransactionOperationEnum.Transfer, transaction.DigitalAccount.Id, transaction.DigitalAccountSender.Id);
+
+            transaction.DigitalAccount = digitalAccount;
+            transaction.DigitalAccountSender = transactionSender.DigitalAccount;
 
             return transaction;
         }
 
         private async Task<DigitalAccountTransactionModel> ProcessCustomerSenderTransferTransactionAsync(DigitalAccountTransactionModel transaction)
         {
-            await ValidRequestCustomerIdWithCustomerTokenAsync(transaction.DigitalAccountSenderId.Value);
 
-            DigitalAccountTransactionModel transactionSender = await ProcessCustomerSenderTransactionAsync(transaction, TransactionOperationEnum.Transfer);
+            DigitalAccountModel digitalAccountSender = await _digitalAccounBusiness.GetByIdAsync(transaction.DigitalAccountSender.Id);
+
+            await ValidRequestCustomerIdWithCustomerTokenAsync(digitalAccountSender.CustomerId);
+
+            DigitalAccountTransactionModel transactionSender = await ProcessCustomerSenderTransactionAsync(transaction, TransactionOperationEnum.Transfer,
+                                                                                                           digitalAccountSender);
+            transactionSender.DigitalAccount = digitalAccountSender;
 
             return transactionSender;
         }
 
         private async Task<DigitalAccountTransactionModel> ProcessCustomerSenderTransactionAsync(DigitalAccountTransactionModel transaction,
-                                                                                                 TransactionOperationEnum operation)
+                                                                                                 TransactionOperationEnum operation,
+                                                                                                 DigitalAccountModel digitalAccountSender)
         {
-            await ValidTransactionIfCustomerSenderAndRecipientEqualsAsync(transaction.DigitalAccountSenderId.Value, transaction.DigitalAccountId);
+            await ValidTransactionIfAccountSenderAndRecipientEqualsAsync(transaction.DigitalAccountSender.Id, transaction.DigitalAccount.Id);
 
-            DigitalAccountModel digitalAccountSender = await _digitalAccounBusiness.GetByIdAsync(transaction.DigitalAccountSenderId.Value);
-
-            await CheckExceededDigitalAccountDailyLimitTransctionAsync(transaction.DigitalAccountSenderId.Value, transaction.Value, digitalAccountSender);
+            await CheckExceededDigitalAccountDailyLimitTransctionAsync(transaction.DigitalAccountSender.Id, transaction.Value, digitalAccountSender);
 
             DigitalAccountTransactionModel transactionSender = await CreateTransactionAsync(transaction, TransactionTypeEnum.Output,
-               operation, transaction.DigitalAccountSenderId.Value);
+               operation, transaction.DigitalAccountSender.Id, transaction.DigitalAccount.Id);
 
             return transactionSender;
         }
 
         private async Task<DigitalAccountTransactionModel> CreateTransactionAsync(DigitalAccountTransactionModel transaction, TransactionTypeEnum type,
-                                                                                  TransactionOperationEnum operation, int? customerSenderId)
+                                                                                  TransactionOperationEnum operation, int customerRecipientId, int? customerSenderId)
         {
-            transaction.DigitalAccountSenderId = customerSenderId;
-            transaction.Type = type;
-            transaction.Operation = operation;
-            transaction.Status = TransactionStatusEnum.Pending;
+            DigitalAccountTransactionModel newTransaction = new DigitalAccountTransactionModel()
+            {
+                Value = transaction.Value,
+                DigitalAccountId = customerRecipientId,
+                DigitalAccountSenderId = customerSenderId,
+                Type = type,
+                Operation = operation,
+                Status = TransactionStatusEnum.Pending
+            };
 
-            transaction = await InsertAsync(transaction);
+            transaction = await InsertAsync(newTransaction);
 
             return transaction;
         }
 
-        private Task ValidTransactionIfCustomerSenderAndRecipientEqualsAsync(int customerSenderId, int customerRecipientId)
+        private Task ValidTransactionIfAccountSenderAndRecipientEqualsAsync(int customerSenderId, int customerRecipientId)
         {
             return Task.Run(() =>
             {
@@ -110,18 +127,18 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
             });
         }
 
-        //private Task ValidRequestCustomerIdWithCustomerTokenAsync(int customerId)
-        //{
-        //    return Task.Run(() =>
-        //    {
-        //        int customerTokenId;
+        private Task ValidRequestCustomerIdWithCustomerTokenAsync(int customerId)
+        {
+            return Task.Run(() =>
+            {
+                int customerTokenId;
 
-        //        Int32.TryParse(_token.Claims.Where(x => x.Type.Equals("Id")).FirstOrDefault().Value, out customerTokenId);
+                Int32.TryParse(_token.Claims.Where(x => x.Type.Equals("Id")).FirstOrDefault().Value, out customerTokenId);
 
-        //        if (customerTokenId == 0 || customerTokenId != customerId)
-        //            throw new KeyNotFoundException("Conta não localizada");
-        //    });
-        //}
+                if (customerTokenId == 0 || customerTokenId != customerId)
+                    throw new KeyNotFoundException("Conta não localizada");
+            });
+        }
 
         private async Task CheckExceededDigitalAccountDailyLimitTransctionAsync(int digitalAccountId, decimal transactionValue, DigitalAccountModel digitalAccount)
         {

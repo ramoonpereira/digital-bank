@@ -14,6 +14,8 @@ namespace DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests
         /// <summary>
         /// Id
         /// </summary>
+        [Required]
+        [Range(1, Int32.MaxValue, ErrorMessage = "Informe um Id valido")]
         public int? Id { get; set; }
 
     }

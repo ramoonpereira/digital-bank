@@ -7,5 +7,6 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Business.Repository
     {
         Task<CustomerModel> InsertAsync(CustomerModel newCustomer);
         Task<CustomerModel> GetCustomerByEmailAsync(string email);
+        Task<CustomerModel> GetCustomerByDocumentAsync(long document);
     }
 }

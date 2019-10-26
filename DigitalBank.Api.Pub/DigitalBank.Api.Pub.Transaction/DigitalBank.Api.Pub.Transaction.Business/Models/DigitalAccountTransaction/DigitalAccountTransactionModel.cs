@@ -1,4 +1,5 @@
-﻿using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction.Enum;
+﻿using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
+using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction
 {
-    [Table("digital_account")]
+    [Table("digital_account_transactions")]
     public class DigitalAccountTransactionModel
     {
         [Key]
@@ -34,5 +35,11 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransact
 
         [Column("digital_account_sender_id")]
         public int? DigitalAccountSenderId { get; set; }
+
+        [ForeignKey("DigitalAccountId")]
+        public virtual DigitalAccountModel DigitalAccount { get; set; }
+
+        [ForeignKey("DigitalAccountSenderId")]
+        public virtual DigitalAccountModel DigitalAccountSender { get; set; }
     }
 }

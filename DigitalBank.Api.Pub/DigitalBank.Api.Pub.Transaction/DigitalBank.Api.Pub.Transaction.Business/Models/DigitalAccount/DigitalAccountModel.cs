@@ -1,5 +1,7 @@
 ﻿
+using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,5 +37,12 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount
 
         [Column("customer_id")]
         public int CustomerId { get; set; }
+
+        [InverseProperty("DigitalAccount")]
+        public virtual ICollection<DigitalAccountTransactionModel> DigitalAccountTransactions { get; set; }
+
+        [InverseProperty("DigitalAccountSender")]
+        public virtual ICollection<DigitalAccountTransactionModel> DigitalAccountTransactionsSender { get; set; }
+
     }
 }

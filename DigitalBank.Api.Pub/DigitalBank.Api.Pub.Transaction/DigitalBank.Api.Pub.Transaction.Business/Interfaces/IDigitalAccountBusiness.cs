@@ -1,5 +1,4 @@
-﻿using DigitalBank.Api.Pub.Transaction.Business.Models.Customer;
-using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
+﻿using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
 using System.Threading.Tasks;
 
 namespace DigitalBank.Api.Pub.Transaction.Business.Interfaces

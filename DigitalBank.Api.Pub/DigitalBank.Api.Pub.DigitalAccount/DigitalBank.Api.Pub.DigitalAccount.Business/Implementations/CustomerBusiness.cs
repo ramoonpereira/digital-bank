@@ -25,6 +25,8 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Business.Implementations
         {
             await ValidateCustomerEmailNotExistAsync(newCustomer.Email);
 
+            await ValidateCustomerDocumentNotExistAsync(newCustomer.Document);
+
             newCustomer.Password = await _encryptorHandler.CreateEncryptPassword(newCustomer.Password);
 
             newCustomer = await _customerRepository.InsertAsync(newCustomer);
@@ -40,6 +42,14 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Business.Implementations
 
             if (customer != null)
                 throw new ArgumentException("E-mail já cadastrado");
+        }
+
+        private async Task ValidateCustomerDocumentNotExistAsync(long document)
+        {
+            CustomerModel customer = await _customerRepository.GetCustomerByDocumentAsync(document);
+
+            if (customer != null)
+                throw new ArgumentException("Documento de identidade já cadastrado");
         }
     }
 }
