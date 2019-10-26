@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DigitalBank.Api.Adm.Authenticate</name>
+    </assembly>
+    <members>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Controllers.v1.AuthenticateController.LoginAsync(DigitalBank.Api.Adm.Authenticate.DTOs.v1.Requests.LoginRequestDTO)">
+            <summary>
+            Autentica o administrador
+            </summary>
+            <param name="login">Objeto de autenticação. O cliente poderá entrar com o e-mail cadastrado</param>
+            <returns></returns>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Requests.LoginRequestDTO.Email">
+            <summary>
+            Email (ex: example@example.com)
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Requests.LoginRequestDTO.Password">
+            <summary>
+            Senha
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.AdministratorResponseDTO.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.AdministratorResponseDTO.Name">
+            <summary>
+            Nome
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.AdministratorResponseDTO.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.TokenResponseDTO.User">
+            <summary>
+            Usuario do Token
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.TokenResponseDTO.AccessToken">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.TokenResponseDTO.TokenType">
+            <summary>
+            Tipo do Token
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.TokenResponseDTO.ExpiresIn">
+            <summary>
+            Data Expiração
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Responses.TokenResponseDTO.CreatedDate">
+            <summary>
+            Data Criação
+            </summary>
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Authenticate.Infrastructure.AutoMapper.MappingProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Infrastructure.AutoMapper.MappingProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Infrastructure.Exceptions.ExceptionHandler.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary> 
+             
+            </summary> 
+            <param name="next"></param> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Infrastructure.Exceptions.ExceptionHandler.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="logger"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Infrastructure.Exceptions.ExceptionHandler.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Infrastructure.Exceptions.ExceptionHandler.WriteExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <param name="code"></param> 
+            <returns></returns> 
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Authenticate.Infrastructure.Exceptions.ExceptionHandlerExtensions">
+            <summary> 
+             
+            </summary> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Infrastructure.Exceptions.ExceptionHandlerExtensions.UseCustomExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary> 
+             
+            </summary> 
+            <param name="builder"></param> 
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Authenticate.Program">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Authenticate.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Authenticate.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Authenticate.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>
