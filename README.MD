@@ -51,6 +51,13 @@ Docker Compose - >= 17.09.0
 - JWT_EXPIREHOURS: Tempo de expiração de token gerado no projeto
 - ENCRYPTOR_SECRET: Secret da criptografia no projeto
 - MYSQL_CONNECTIONSTRING: String de conexão com o MySQL
+- RABBITMQ_HOST: Host de conexão rabbitmq
+- RABBITMQ_USER_NAME: Usuario rabbitmq
+- RABBITMQ_PASSWORD: Senha rabbitmq
+- RABBITMQ_TRANSACTION_EXCHANGE: Exchange de transações
+- RABBITMQ_TRANSACTION_QUEUE: Fila de transações
+- RABBITMQ_TRANSACTION_RETRY: Intervalo retentativas
+- RABBITMQ_TRANSACTION_COUNT: Quantidade retentativas
 ```
 
 **Executar Docker:**
@@ -86,6 +93,8 @@ Efetuar cadastro da conta digital para geração de acesso conforme dados cadast
 | Autenticação Administrativa | http://localhost:7001/ | v1 | [DigitalBank.Api.Adm.Authenticate](DigitalBank.Api.Adm/DigitalBank.Api.Adm.Authenticate/readme.md) |
 | Conta Digital Administrativa | http://localhost:7002/ | v1 | [DigitalBank.Api.Adm.DigitalAccount](DigitalBank.Api.Adm/DigitalBank.Api.Adm.DigitalAccount/readme.md) |
 | Transação Administrativa | http://localhost:7003/ | v1 | [DigitalBank.Api.Adm.Transaction](DigitalBank.Api.Adm/DigitalBank.Api.Adm.Transaction/readme.md) |
-
+| Worker Transação | http://localhost:9001/ | v1 | [DigitalBank.Worker.Transaction](DigitalBank.Workers/DigitalBank.Worker.Transaction/readme.md) |
+| MySQL | http://localhost:3306/ | 5.7 | --- |
+| RabbitMQ | http://localhost:15672/ | 3.0 | --- |
 
 
