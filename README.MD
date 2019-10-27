@@ -22,30 +22,25 @@ Docker Compose - >= 17.09.0
 
 **Asp .Net Core:**
 
-```sh
-(https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
-```
+* [.NET Core SDK](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
 
 **RabbitMQ**
 
-```sh
-https://www.rabbitmq.com/download.html
-```
+* [RabbitMQ](https://www.rabbitmq.com/download.html)
 
 **Mysql:**
-```sh
-https://www.mysql.com/downloads/
-```
+
+* [MySQL](https://www.mysql.com/downloads/)
+
 
 **Visual Studio:**
-```sh
-https://visualstudio.microsoft.com/pt-br/
-```
+
+* [Visual Studio](https://visualstudio.microsoft.com/pt-br/)
+
 
 **Docker Compose:**
-```sh
-https://www.docker.com/products/docker-desktop
-```
+
+* [Visual Studio](https://www.docker.com/products/docker-desktop)
 
 
 ## Configuração para Execução do projeto
@@ -79,7 +74,7 @@ Efetuar cadastro da conta digital para geração do acesso.
 
 | Recurso | Url |Versão | Documentação |
 | -- | -- | -- | -- |
-| Autenticação Pública | http://localhost:5001/ | v1 | * [DigitalBank.Api.Pub.Authenticate](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/README.MD) |
+| Autenticação Pública | http://localhost:5001/ | v1 | * [DigitalBank.Api.Pub.Authenticate](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/readme.md) |
 
 
 
