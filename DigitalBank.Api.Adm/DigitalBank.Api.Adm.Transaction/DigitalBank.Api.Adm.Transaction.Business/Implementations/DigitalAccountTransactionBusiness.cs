@@ -2,6 +2,7 @@
 using DigitalBank.Api.Adm.Transaction.Business.Models.DigitalAccount;
 using DigitalBank.Api.Adm.Transaction.Business.Models.DigitalAccountTransaction;
 using DigitalBank.Api.Adm.Transaction.Business.Models.DigitalAccountTransaction.Enum;
+using DigitalBank.Api.Adm.Transaction.Business.Pagination;
 using DigitalBank.Api.Adm.Transaction.Business.Repository;
 using DigitalBank.Api.Adm.Transaction.Security.JWT.Handler.Interfaces;
 using System;
@@ -32,7 +33,7 @@ namespace DigitalBank.Api.Adm.Transaction.Business.Implementations
             return transaction;
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime? startDate, DateTime? endDate)
+        public async Task<PagedResultBase<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime? startDate, DateTime? endDate, int page, int pageSize)
         {
             if (startDate == null)
                 startDate = DateTime.Now.AddDays(-30);
@@ -40,10 +41,10 @@ namespace DigitalBank.Api.Adm.Transaction.Business.Implementations
             if (endDate == null)
                 endDate = DateTime.Now;
 
-            return await _digitalAccountTransactionRepository.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate.Value, endDate.Value);
+            return await _digitalAccountTransactionRepository.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate.Value, endDate.Value, page, pageSize);
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetFilterAsync(DateTime? startDate, DateTime? endDate)
+        public async Task<PagedResultBase<DigitalAccountTransactionModel>> GetFilterAsync(DateTime? startDate, DateTime? endDate, int page, int pageSize)
         {
             if (startDate == null)
                 startDate = DateTime.Now.AddDays(-30);
@@ -51,7 +52,7 @@ namespace DigitalBank.Api.Adm.Transaction.Business.Implementations
             if (endDate == null)
                 endDate = DateTime.Now;
 
-            return await _digitalAccountTransactionRepository.GetFilterAsync(startDate.Value, endDate.Value);
+            return await _digitalAccountTransactionRepository.GetFilterAsync(startDate.Value, endDate.Value, page, pageSize);
         }
     }
 }

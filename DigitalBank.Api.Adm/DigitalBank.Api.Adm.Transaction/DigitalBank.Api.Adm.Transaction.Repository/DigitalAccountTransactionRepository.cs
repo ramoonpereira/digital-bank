@@ -1,5 +1,5 @@
 ﻿using DigitalBank.Api.Adm.Transaction.Business.Models.DigitalAccountTransaction;
-using DigitalBank.Api.Adm.Transaction.Business.Models.DigitalAccountTransaction.Enum;
+using DigitalBank.Api.Adm.Transaction.Business.Pagination;
 using DigitalBank.Api.Adm.Transaction.Business.Repository;
 using DigitalBank.Api.Adm.Transaction.Repository.DbContext;
 using Microsoft.EntityFrameworkCore;
@@ -19,12 +19,14 @@ namespace DigitalBank.Api.Adm.Transaction.Repository
             _appDbContext = appDbContext;
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate)
+        public async Task<PagedResultBase<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate, int page, int pageSize)
         {
-            return await _appDbContext.DigitalAccountTransactions
+            var query = _appDbContext.DigitalAccountTransactions
                                    .Where(c => c.DigitalAccountId == digitalAccountId &&
                                     c.CreatedDate.Date >= startDate.Date &&
-                                    c.CreatedDate.Date <= endDate.Date).ToListAsync();
+                                    c.CreatedDate.Date <= endDate.Date);
+
+            return await PaginationService.GetPagination(query, page, pageSize);
         }
 
         public Task<DigitalAccountTransactionModel> GetByIdAsync(int transactionId)
@@ -35,11 +37,12 @@ namespace DigitalBank.Api.Adm.Transaction.Repository
             });
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetFilterAsync(DateTime startDate, DateTime endDate)
+        public async Task<PagedResultBase<DigitalAccountTransactionModel>> GetFilterAsync(DateTime startDate, DateTime endDate, int page, int pageSize)
         {
-            return await _appDbContext.DigitalAccountTransactions
-                           .Where(c => c.CreatedDate.Date >= startDate.Date &&
-                                  c.CreatedDate.Date <= endDate.Date).ToListAsync();
+            var query = _appDbContext.DigitalAccountTransactions.Where(c => c.CreatedDate.Date >= startDate.Date &&
+                                   c.CreatedDate.Date <= endDate.Date);
+
+            return await PaginationService.GetPagination(query, page, pageSize);
         }
     }
 }

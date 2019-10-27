@@ -2,6 +2,7 @@
 using DigitalBank.Api.Adm.Transaction.Business.Interfaces;
 using DigitalBank.Api.Adm.Transaction.Business.Models.DigitalAccount;
 using DigitalBank.Api.Adm.Transaction.Business.Models.DigitalAccountTransaction;
+using DigitalBank.Api.Adm.Transaction.Business.Pagination;
 using DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses;
 using DigitalBank.Api.Adm.Transaction.Security.JWT.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -57,18 +58,20 @@ namespace DigitalBank.Api.Adm.Transaction.Controllers.v1
         /// <param name="digitalAccountId">Id da conta digital</param>
         /// <param name="startDate">Data Inicial - Default 30 dias</param>
         /// <param name="endDate">Data Final - Default Dia Atual</param>
+        /// <param name="page">Pagina - Default 1</param>
+        /// <param name="pageSize">Pagina - Default 10</param>
         /// <returns></returns>
         [HttpGet("{digitalAccountId}/transactions")]
         [Authorize(Roles = "adm-transaction-r")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(List<TransactionResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedResultBase<TransactionResponseDTO>), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetAllTransactionsByPeriodAsync([Required]int digitalAccountId, [FromQuery]DateTime? startDate, [FromQuery]DateTime? endDate)
+        public async Task<IActionResult> GetAllTransactionsByPeriodAsync([Required]int digitalAccountId, [FromQuery]DateTime? startDate, [FromQuery]DateTime? endDate, [FromQuery]int page = 1, [FromQuery]int pageSize = 10)
         {
-            List<DigitalAccountTransactionModel> transactions =
-                await _digitalAccountTransactionBusiness.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate, endDate);
+            PagedResultBase<DigitalAccountTransactionModel> transactions =
+                await _digitalAccountTransactionBusiness.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate, endDate, page, pageSize);
 
-            List<TransactionResponseDTO> response = _mapper.Map<List<TransactionResponseDTO>>(transactions);
+            PagedResultBase<TransactionResponseDTO> response = _mapper.Map<PagedResultBase<TransactionResponseDTO>>(transactions);
 
             return Ok(response);
         }
@@ -78,18 +81,20 @@ namespace DigitalBank.Api.Adm.Transaction.Controllers.v1
         /// </summary>
         /// <param name="startDate">Data Inicial - Default 30 dias</param>
         /// <param name="endDate">Data Final - Default Dia Atual</param>
+        /// <param name="page">Pagina - Default 1</param>
+        /// <param name="pageSize">Pagina - Default 10</param>
         /// <returns></returns>
         [HttpGet("filter")]
         [Authorize(Roles = "adm-transaction-r")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(List<TransactionResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedResultBase<TransactionResponseDTO>), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetFilterAsync([FromQuery]DateTime? startDate, [FromQuery]DateTime? endDate)
+        public async Task<IActionResult> GetFilterAsync([FromQuery]DateTime? startDate, [FromQuery]DateTime? endDate, [FromQuery]int page = 1, [FromQuery]int pageSize = 10)
         {
-            List<DigitalAccountTransactionModel> transactions =
-                await _digitalAccountTransactionBusiness.GetFilterAsync(startDate, endDate);
+            PagedResultBase<DigitalAccountTransactionModel> transactions =
+                await _digitalAccountTransactionBusiness.GetFilterAsync(startDate, endDate, page, pageSize);
 
-            List<TransactionResponseDTO> response = _mapper.Map<List<TransactionResponseDTO>>(transactions);
+            PagedResultBase<TransactionResponseDTO> response = _mapper.Map<PagedResultBase<TransactionResponseDTO>>(transactions);
 
             return Ok(response);
         }
