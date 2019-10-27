@@ -1,5 +1,6 @@
 # Digital Bank
-Web Apis Digital Bank - Banco Digital
+
+>Web Apis Digital Bank - Banco Digital
 
 ![image](https://credicarvantagens.com/wp-content/uploads/2019/07/banco-digital.jpg)
 
@@ -22,7 +23,7 @@ Docker Compose - >= 17.09.0
 **Asp .Net Core:**
 
 ```sh
-https://github.com/dotnet/core/blob/master/release-notes/download-archive.md
+(https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
 ```
 
 **RabbitMQ**
@@ -57,12 +58,6 @@ https://www.docker.com/products/docker-desktop
 docker-compose up -d
 ```
 
-**Executar o projeto:**
-
-```sh
-java -jar target/albumstore-x.x.x.jar
-```
-
 ## Autenticação
 
 **Administrador Padrão:**
@@ -83,7 +78,7 @@ Efetuar cadastro da conta digital para geração do acesso.
 **Recursos disponiveis:**
 
 | Recurso | Url |Versão | Documentação |
-| -- | -- | -- | -- | -- |
+| -- | -- | -- | -- |
 | Autenticação Pública | http://localhost:5001/ | v1 | * [DigitalBank.Api.Pub.Authenticate](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/README.MD) |
 
 
