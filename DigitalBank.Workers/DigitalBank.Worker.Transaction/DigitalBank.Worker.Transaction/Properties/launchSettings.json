@@ -29,11 +29,11 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
         "ASPNETCORE_URLS": "https://+:443;http://+:80",
-        "ASPNETCORE_HTTPS_PORT": "44332"
+        "ASPNETCORE_HTTPS_PORT": "44345"
       },
-      "httpPort": 54981,
+      "httpPort": 49267,
       "useSSL": true,
-      "sslPort": 44332
+      "sslPort": 44345
     }
   }
 }

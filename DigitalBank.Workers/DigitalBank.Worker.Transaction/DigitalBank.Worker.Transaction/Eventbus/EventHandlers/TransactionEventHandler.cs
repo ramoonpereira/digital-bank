@@ -1,8 +1,6 @@
 ﻿using DigitalBank.Worker.Transaction.Business.Interfaces;
 using DigitalBank.Worker.Transaction.Eventbus.Contracts;
 using MassTransit;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

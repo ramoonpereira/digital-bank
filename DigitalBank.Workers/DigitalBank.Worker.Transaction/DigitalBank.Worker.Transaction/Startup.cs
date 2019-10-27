@@ -1,17 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Swashbuckle.AspNetCore.Swagger;
-using Microsoft.Extensions.PlatformAbstractions;
-using System.IO;
-using Microsoft.Extensions.Configuration;
-using AutoMapper;
-using Microsoft.Extensions.DependencyInjection;
-using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using DigitalBank.Worker.Transaction.Infrastructure.DependencyInjection;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DigitalBank.Worker.Transaction
 {
@@ -41,13 +37,7 @@ namespace DigitalBank.Worker.Transaction
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddMvc(config =>
-            {
-                var policy = new AuthorizationPolicyBuilder()
-                                 .RequireAuthenticatedUser()
-                                 .Build();
-                config.Filters.Add(new AuthorizeFilter(policy));
-            });
+            services.AddMvc();
             services.RegisterWebApiServices(Configuration);
             services.RegisterDatabase(Configuration);
             services.RegisterBus(Configuration);
@@ -60,7 +50,6 @@ namespace DigitalBank.Worker.Transaction
         /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseMvc();
         }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using DigitalBank.Worker.Transaction.Business.Implementations;
+﻿using DigitalBank.Worker.Transaction.Business.Implementations;
 using DigitalBank.Worker.Transaction.Business.Interfaces;
 using DigitalBank.Worker.Transaction.Business.Repository;
 using DigitalBank.Worker.Transaction.Eventbus.EventHandlers;
@@ -9,19 +8,13 @@ using DigitalBank.Worker.Transaction.Repository.DbContext;
 using GreenPipes;
 using MassTransit;
 using MassTransit.RabbitMqTransport.Configuration;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.PlatformAbstractions;
-using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DigitalBank.Worker.Transaction.Infrastructure.DependencyInjection
@@ -59,7 +52,7 @@ namespace DigitalBank.Worker.Transaction.Infrastructure.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection RegisterBus(this IServiceCollection services,IConfiguration configuration)
+        public static IServiceCollection RegisterBus(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMassTransit(x =>
             {

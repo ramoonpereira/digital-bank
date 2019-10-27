@@ -5,6 +5,8 @@ using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction.
 using DigitalBank.Api.Pub.Transaction.Business.Pagination;
 using DigitalBank.Api.Pub.Transaction.Business.Repository;
 using DigitalBank.Api.Pub.Transaction.Security.JWT.Handler.Interfaces;
+using DigitalBank.Worker.Transaction.Eventbus.Contracts;
+using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,13 +21,15 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
         private IDigitalAccountBusiness _digitalAccounBusiness;
         private ITokenHandler _tokenHandler;
         private JwtSecurityToken _token;
+        private IBus _bus;
 
         public DigitalAccountTransactionBusiness(IDigitalAccountTransactionRepository digitalAccountTransactionRepository, IDigitalAccountBusiness digitalAccounBusiness,
-                                                 ITokenHandler tokenHandler)
+                                                 ITokenHandler tokenHandler, IBusControl busControl)
         {
             _digitalAccountTransactionRepository = digitalAccountTransactionRepository;
             _digitalAccounBusiness = digitalAccounBusiness;
             _tokenHandler = tokenHandler;
+            _bus = busControl;
         }
         public async Task Authorize(string accessToken)
         {
@@ -166,7 +170,11 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
 
         public async Task<DigitalAccountTransactionModel> InsertAsync(DigitalAccountTransactionModel digitalAccountTransaction)
         {
-            return await _digitalAccountTransactionRepository.InsertAsync(digitalAccountTransaction);
+            DigitalAccountTransactionModel transaction = await _digitalAccountTransactionRepository.InsertAsync(digitalAccountTransaction);
+
+            _bus.Publish<ITransactionEvent>(new { transaction.Id }).GetAwaiter().GetResult();
+
+            return transaction;
         }
 
         public async Task<PagedResultBase<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime? startDate, DateTime? endDate, int page, int pageSize)

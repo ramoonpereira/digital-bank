@@ -1,0 +1,25 @@
+FROM microsoft/dotnet:2.2-sdk AS build-env
+WORKDIR /app
+EXPOSE 80
+
+WORKDIR /src
+
+COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.csproj DigitalBank.Api.Pub.Authenticate/
+COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Business/DigitalBank.Api.Pub.Authenticate.Business.csproj DigitalBank.Api.Pub.Authenticate.Business/
+COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Repository/DigitalBank.Api.Pub.Authenticate.Repository.csproj DigitalBank.Api.Pub.Authenticate.Repository/
+COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Security/DigitalBank.Api.Pub.Authenticate.Security.csproj DigitalBank.Api.Pub.Authenticate.Security/
+
+COPY . .
+
+WORKDIR /src/DigitalBank.Api.Pub.Authenticate
+
+RUN dotnet restore DigitalBank.Api.Pub.Authenticate.csproj
+
+RUN dotnet build DigitalBank.Api.Pub.Authenticate.csproj
+
+RUN dotnet publish DigitalBank.Api.Pub.Authenticate.csproj -c Release -o out /app
+
+FROM microsoft/dotnet:2.2-aspnetcore-runtime
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "DigitalBank.Api.Pub.Authenticate.dll"]

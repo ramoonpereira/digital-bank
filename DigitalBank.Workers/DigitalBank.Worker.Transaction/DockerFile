@@ -1,0 +1,24 @@
+FROM microsoft/dotnet:2.2-sdk AS build-env
+WORKDIR /app
+EXPOSE 80
+
+WORKDIR /src
+
+COPY ./DigitalBank.Workers/DigitalBank.Worker.Transaction/DigitalBank.Worker.Transaction/DigitalBank.Worker.Transaction.csproj DigitalBank.Worker.Transaction/
+COPY ./DigitalBank.Workers/DigitalBank.Worker.Transaction/DigitalBank.Worker.Transaction.Business/DigitalBank.Worker.Transaction.Business.csproj DigitalBank.Worker.Transaction.Business/
+COPY ./DigitalBank.Workers/DigitalBank.Worker.Transaction/DigitalBank.Worker.Transaction.Repository/DigitalBank.Worker.Transaction.Repository.csproj DigitalBank.Worker.Transaction.Repository/
+
+COPY . .
+
+WORKDIR /src/DigitalBank.Worker.Transaction
+
+RUN dotnet restore DigitalBank.Worker.Transaction.csproj
+
+RUN dotnet build DigitalBank.Worker.Transaction.csproj
+
+RUN dotnet publish DigitalBank.Worker.Transaction.csproj -c Release -o out /app
+
+FROM microsoft/dotnet:2.2-aspnetcore-runtime
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "DigitalBank.Worker.Transaction.dll"]

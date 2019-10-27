@@ -52,6 +52,7 @@ namespace DigitalBank.Api.Pub.Transaction
             });
             services.RegisterWebApiServices(Configuration);
             services.RegisterDatabase(Configuration);
+            services.RegisterMessageBus(Configuration);
         }
 
         /// <summary>

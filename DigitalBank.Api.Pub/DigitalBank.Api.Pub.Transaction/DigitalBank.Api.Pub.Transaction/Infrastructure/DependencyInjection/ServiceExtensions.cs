@@ -3,16 +3,19 @@ using DigitalBank.Api.Pub.Transaction.Business.Implementations;
 using DigitalBank.Api.Pub.Transaction.Business.Interfaces;
 using DigitalBank.Api.Pub.Transaction.Business.Repository;
 using DigitalBank.Api.Pub.Transaction.Infrastructure.AutoMapper;
+using DigitalBank.Api.Pub.Transaction.Infrastructure.EventBus;
 using DigitalBank.Api.Pub.Transaction.Repository;
 using DigitalBank.Api.Pub.Transaction.Repository.DbContext;
 using DigitalBank.Api.Pub.Transaction.Security.Encryptor.Handler;
 using DigitalBank.Api.Pub.Transaction.Security.Encryptor.Handler.Interfaces;
 using DigitalBank.Api.Pub.Transaction.Security.JWT.Handler;
 using DigitalBank.Api.Pub.Transaction.Security.JWT.Handler.Interfaces;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
@@ -135,6 +138,27 @@ namespace DigitalBank.Api.Pub.Transaction.Infrastructure.DependencyInjection
             services.AddDbContext<AppDbContext>(options =>
                options.UseLazyLoadingProxies()
                .UseMySql(connectionString));
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterMessageBus(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddMassTransit(x =>
+            {
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    var uri = new Uri(configuration["RabbitMq:RABBITMQ_HOST"]);
+
+                    var host = cfg.Host(uri, hostConfigurator =>
+                    {
+                        hostConfigurator.Username(configuration["RabbitMq:RABBITMQ_USER_NAME"]);
+                        hostConfigurator.Password(configuration["RabbitMq:RABBITMQ_PASSWORD"]);
+                    });
+                }));
+            });
+
+            services.AddSingleton<IHostedService, BusService>();
 
             return services;
         }
