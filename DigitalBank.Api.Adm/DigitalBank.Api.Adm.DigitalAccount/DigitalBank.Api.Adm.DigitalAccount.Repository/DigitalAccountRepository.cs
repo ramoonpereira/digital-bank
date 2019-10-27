@@ -1,4 +1,5 @@
 ﻿using DigitalBank.Api.Adm.DigitalAccount.Business.Models.DigitalAccount;
+using DigitalBank.Api.Adm.DigitalAccount.Business.Pagination;
 using DigitalBank.Api.Adm.DigitalAccount.Business.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace DigitalBank.Api.Adm.DigitalAccount.Repository.DbContext
             _appDbContext = appDbContext;
         }
 
-        public async Task<List<DigitalAccountModel>> GetAllAsync()
+        public async Task<PagedResultBase<DigitalAccountModel>> GetAllAsync(int page, int pageSize)
         {
-            return await _appDbContext.DigitalAccounts.ToListAsync();
+            return await PaginationService.GetPagination(_appDbContext.DigitalAccounts, page, pageSize);
         }
 
         public Task<DigitalAccountModel> GetByIdAsync(int id)

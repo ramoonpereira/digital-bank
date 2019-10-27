@@ -4,12 +4,6 @@
         <name>DigitalBank.Api.Adm.DigitalAccount</name>
     </assembly>
     <members>
-        <member name="M:DigitalBank.Api.Adm.DigitalAccount.Controllers.v1.DigitalAccountController.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)">
-            <summary> 
-            Recupera o Access token 
-            </summary> 
-            <param name="context"></param> 
-        </member>
         <member name="M:DigitalBank.Api.Adm.DigitalAccount.Controllers.v1.DigitalAccountController.GetDigitalAccountByCustomerAsync(System.Int32)">
             <summary>
             Busca conta digital do cliente
@@ -24,11 +18,13 @@
             <param name="id">Id  da conta digital</param>
             <returns></returns>
         </member>
-        <member name="M:DigitalBank.Api.Adm.DigitalAccount.Controllers.v1.DigitalAccountController.GetAllAsync">
+        <member name="M:DigitalBank.Api.Adm.DigitalAccount.Controllers.v1.DigitalAccountController.GetAllAsync(System.Int32,System.Int32)">
             <summary>
             Busca todas as contas digitais
             </summary>
             <returns></returns>
+            <param name="page">Pagina - Default 1</param>
+            <param name="pageSize">Pagina - Default 10</param>
         </member>
         <member name="P:DigitalBank.Api.Adm.DigitalAccount.DTOs.v1.Responses.DigitalAccountResponseDTO.Id">
             <summary>

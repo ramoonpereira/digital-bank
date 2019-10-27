@@ -1,5 +1,6 @@
 ﻿using DigitalBank.Api.Adm.DigitalAccount.Business.Interfaces;
 using DigitalBank.Api.Adm.DigitalAccount.Business.Models.DigitalAccount;
+using DigitalBank.Api.Adm.DigitalAccount.Business.Pagination;
 using DigitalBank.Api.Adm.DigitalAccount.Business.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -35,9 +36,9 @@ namespace DigitalBank.Api.Adm.DigitalAccount.Business.Implementations
             return digitalAccount;
         }
 
-        public async Task<List<DigitalAccountModel>> GetAllAsync()
+        public async Task<PagedResultBase<DigitalAccountModel>> GetAllAsync(int page, int pageSize)
         {
-            return await _digitalAccountRepository.GetAllAsync();
+            return await _digitalAccountRepository.GetAllAsync(page, pageSize);
         }
     }
 }

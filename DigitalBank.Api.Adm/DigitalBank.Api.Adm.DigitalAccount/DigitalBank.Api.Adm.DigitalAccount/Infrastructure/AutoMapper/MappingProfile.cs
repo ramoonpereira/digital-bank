@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DigitalBank.Api.Adm.DigitalAccount.Business.Models.Customer;
 using DigitalBank.Api.Adm.DigitalAccount.Business.Models.DigitalAccount;
+using DigitalBank.Api.Adm.DigitalAccount.Business.Pagination;
 using DigitalBank.Api.Adm.DigitalAccount.DTOs.v1.Responses;
 using DigitalBank.Api.Adm.DigitalAccount.Security.JWT.Model;
 
@@ -16,7 +17,9 @@ namespace DigitalBank.Api.Adm.DigitalAccount.Infrastructure.AutoMapper
         /// </summary>
         public MappingProfile()
         {
+            CreateMap<PagedResultBase<DigitalAccountModel>, PagedResultBase<DigitalAccountResponseDTO>>().ReverseMap();
             CreateMap<DigitalAccountModel, DigitalAccountResponseDTO>().ReverseMap();
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using DigitalBank.Api.Adm.DigitalAccount.Business.Interfaces;
 using DigitalBank.Api.Adm.DigitalAccount.Business.Models.Customer;
 using DigitalBank.Api.Adm.DigitalAccount.Business.Models.DigitalAccount;
+using DigitalBank.Api.Adm.DigitalAccount.Business.Pagination;
 using DigitalBank.Api.Adm.DigitalAccount.DTOs.v1.Responses;
 using DigitalBank.Api.Adm.DigitalAccount.Security.JWT.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -74,15 +75,17 @@ namespace DigitalBank.Api.Adm.DigitalAccount.Controllers.v1
         /// Busca todas as contas digitais
         /// </summary>
         /// <returns></returns>
+        /// <param name="page">Pagina - Default 1</param>
+        /// <param name="pageSize">Pagina - Default 10</param>
         [HttpGet]
         [Authorize(Roles = "adm-digitalaccount-r")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(List<DigitalAccountResponseDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PagedResultBase<DigitalAccountResponseDTO>), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync([FromQuery]int page = 1, [FromQuery]int pageSize = 10)
         {
-            List<DigitalAccountModel> digitalAccounts = await _digitalAccountBusiness.GetAllAsync();
-            List<DigitalAccountResponseDTO> response = _mapper.Map<List<DigitalAccountResponseDTO>>(digitalAccounts);
+            PagedResultBase<DigitalAccountModel> digitalAccounts = await _digitalAccountBusiness.GetAllAsync(page, pageSize);
+            PagedResultBase<DigitalAccountResponseDTO> response = _mapper.Map<PagedResultBase<DigitalAccountResponseDTO>>(digitalAccounts);
 
             return Ok(response);
         }
