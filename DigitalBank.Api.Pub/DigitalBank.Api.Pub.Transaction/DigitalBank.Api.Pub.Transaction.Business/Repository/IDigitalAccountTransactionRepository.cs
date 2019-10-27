@@ -1,4 +1,5 @@
 ﻿using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
+using DigitalBank.Api.Pub.Transaction.Business.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,7 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Repository
     {
         Task<DigitalAccountTransactionModel> InsertAsync(DigitalAccountTransactionModel digitalAccountTransaction);
 
-        Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate);
+        Task<PagedResultBase<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate, int page, int pageSize);
 
         Task<List<DigitalAccountTransactionModel>> GetTransactionsEffectedByDateAsync(int digitalAccountId,DateTime date);
 

@@ -31,13 +31,15 @@
             <param name="transactionId">Id da transação</param>
             <returns></returns>
         </member>
-        <member name="M:DigitalBank.Api.Pub.Transaction.Controllers.v1.TransactionController.GetAllTransactionsByPeriodAsync(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+        <member name="M:DigitalBank.Api.Pub.Transaction.Controllers.v1.TransactionController.GetAllTransactionsByPeriodAsync(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Int32,System.Int32)">
             <summary>
             Busca transações de uma conta digital por periodo
             </summary>
             <param name="digitalAccountId">Id da conta digital</param>
             <param name="startDate">Data Inicial - Default 30 dias</param>
             <param name="endDate">Data Final - Default Dia Atual</param>
+            <param name="page">Pagina - Default 1</param>
+            <param name="pageSize">Pagina - Default 10</param>
             <returns></returns>
         </member>
         <member name="T:DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests.DigitalAccountRequestDTO">

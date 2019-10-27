@@ -1,5 +1,6 @@
 ﻿using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction.Enum;
+using DigitalBank.Api.Pub.Transaction.Business.Pagination;
 using DigitalBank.Api.Pub.Transaction.Business.Repository;
 using DigitalBank.Api.Pub.Transaction.Repository.DbContext;
 using Microsoft.EntityFrameworkCore;
@@ -28,12 +29,14 @@ namespace DigitalBank.Api.Pub.Transaction.Repository
             return newDigitalAccountTransaction.Entity;
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate)
+        public async Task<PagedResultBase<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime startDate, DateTime endDate, int page, int pageSize)
         {
-            return await _appDbContext.DigitalAccountTransactions
+            var query = _appDbContext.DigitalAccountTransactions
                                    .Where(c => c.DigitalAccountId == digitalAccountId &&
                                     c.CreatedDate.Date >= startDate.Date &&
-                                    c.CreatedDate.Date <= endDate.Date).ToListAsync();
+                                    c.CreatedDate.Date <= endDate.Date);
+
+            return await PaginationService.GetPagination(query, page, pageSize);
         }
 
         public async Task<List<DigitalAccountTransactionModel>> GetTransactionsEffectedByDateAsync(int digitalAccountId, DateTime date)

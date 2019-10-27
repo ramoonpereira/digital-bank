@@ -2,6 +2,7 @@
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction.Enum;
+using DigitalBank.Api.Pub.Transaction.Business.Pagination;
 using DigitalBank.Api.Pub.Transaction.Business.Repository;
 using DigitalBank.Api.Pub.Transaction.Security.JWT.Handler.Interfaces;
 using System;
@@ -168,7 +169,7 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
             return await _digitalAccountTransactionRepository.InsertAsync(digitalAccountTransaction);
         }
 
-        public async Task<List<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime? startDate, DateTime? endDate)
+        public async Task<PagedResultBase<DigitalAccountTransactionModel>> GetAllTransactionsByPeriodAsync(int digitalAccountId, DateTime? startDate, DateTime? endDate, int page, int pageSize)
         {
             if (startDate == null)
                 startDate = DateTime.Now.AddDays(-30);
@@ -176,7 +177,7 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
             if (endDate == null)
                 endDate = DateTime.Now;
 
-            return await _digitalAccountTransactionRepository.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate.Value, endDate.Value);
+            return await _digitalAccountTransactionRepository.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate.Value, endDate.Value, page, pageSize);
         }
 
 

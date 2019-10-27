@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccount;
 using DigitalBank.Api.Pub.Transaction.Business.Models.DigitalAccountTransaction;
+using DigitalBank.Api.Pub.Transaction.Business.Pagination;
 using DigitalBank.Api.Pub.Transaction.DTOs.v1.Requests;
 using DigitalBank.Api.Pub.Transaction.DTOs.v1.Responses;
 using DigitalBank.Api.Pub.Transaction.Security.JWT.Model;
@@ -23,6 +24,8 @@ namespace DigitalBank.Api.Pub.Transaction.Infrastructure.AutoMapper
 
 
             CreateMap<DigitalAccountTransactionModel, TransactionResponseDTO>().ReverseMap();
+
+            CreateMap< PagedResultBase<DigitalAccountTransactionModel>, PagedResultBase<TransactionResponseDTO>>().ReverseMap();
 
             CreateMap<TransactionDepositRequestDTO, DigitalAccountTransactionModel>()
               .ForPath(s => s.DigitalAccountId,
