@@ -57,14 +57,14 @@ docker-compose up -d
 **Administrador Padrão:**
 
 ```sh
-Email:
-Senha:
+Email:administrador@digitalbank.com
+Senha:!@12QWqw
 ```
 
 **Cliente:**
 
 ```sh
-Efetuar cadastro da conta digital para geração do acesso.
+Efetuar cadastro da conta digital para geração de acesso conforme dados cadastrais.
 ```
 
 ## WEB APIs
