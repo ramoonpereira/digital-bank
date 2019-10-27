@@ -1,23 +1,16 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2-stretch-slim AS base
+FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build-env
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
-WORKDIR /src
-COPY ["DigitalBank.Api.Pub.Transaction/DigitalBank.Api.Pub.Transaction.csproj", "DigitalBank.Api.Pub.Transaction/"]
-COPY ["DigitalBank.Api.Pub.Transaction.Security/DigitalBank.Api.Pub.Transaction.Security.csproj", "DigitalBank.Api.Pub.Transaction.Security/"]
-COPY ["DigitalBank.Api.Pub.Transaction.Repository/DigitalBank.Api.Pub.Transaction.Repository.csproj", "DigitalBank.Api.Pub.Transaction.Repository/"]
-COPY ["DigitalBank.Api.Pub.Transaction.Business/DigitalBank.Api.Pub.Transaction.Business.csproj", "DigitalBank.Api.Pub.Transaction.Business/"]
-RUN dotnet restore "DigitalBank.Api.Pub.Transaction/DigitalBank.Api.Pub.Transaction.csproj"
-COPY . .
-WORKDIR "/src/DigitalBank.Api.Pub.Transaction"
-RUN dotnet build "DigitalBank.Api.Pub.Transaction.csproj" -c Release -o /app/build
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM build AS publish
-RUN dotnet publish "DigitalBank.Api.Pub.Transaction.csproj" -c Release -o /app/publish
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-FROM base AS final
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "DigitalBank.Api.Pub.Transaction.dll"]
