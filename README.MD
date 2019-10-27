@@ -83,8 +83,7 @@ Senha: !@12QWqw
 Efetuar cadastro da conta digital para geração de acesso conforme dados cadastrais.
 ```
 
-## WEB APIs
-
+## 
 **Recursos disponiveis:**
 
 | Recurso | Url |Versão | Documentação |
