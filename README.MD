@@ -44,7 +44,17 @@ Docker Compose - >= 17.09.0
 
 ## Configuração para Execução do projeto
 
-**Acessar a pasta raiz do projeto:**
+**Secrets:**
+
+* [Secrets](secrets)
+
+```sh
+- JWT_SECRET: Secret da geração dos tokens de acesso do projeto
+- JWT_EXPIREHOURS: Tempo de expiração do token gerado no projeto
+- ENCRYPTOR_SECRET: Secret da criptografia do projeto
+- MYSQL_CONNECTIONSTRING: String de conexão com o MySQL
+```
+
 
 **Executar Docker:**
 
