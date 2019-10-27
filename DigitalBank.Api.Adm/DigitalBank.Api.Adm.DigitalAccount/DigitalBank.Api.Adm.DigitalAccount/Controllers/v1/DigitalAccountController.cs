@@ -24,23 +24,13 @@ namespace DigitalBank.Api.Adm.DigitalAccount.Controllers.v1
     {
         private IDigitalAccountBusiness _digitalAccountBusiness;
         private IMapper _mapper;
-        private string _accessToken;
+   
         public DigitalAccountController(IDigitalAccountBusiness digitalAccountBusiness, IMapper mapper)
         {
             _digitalAccountBusiness = digitalAccountBusiness;
             _mapper = mapper;
 
         }
-
-        /// <summary> 
-        /// Recupera o Access token 
-        /// </summary> 
-        /// <param name="context"></param> 
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
-            _accessToken = Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
-        }
-
 
         /// <summary>
         /// Busca conta digital do cliente

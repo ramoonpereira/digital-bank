@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DigitalBank.Api.Adm.Transaction</name>
+    </assembly>
+    <members>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Controllers.v1.TransactionController.GetTransactionByIdAsync(System.Int32)">
+            <summary>
+            Busca uma transação da conta
+            </summary>
+            <param name="transactionId">Id da transação</param>
+            <returns></returns>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Controllers.v1.TransactionController.GetAllTransactionsByPeriodAsync(System.Int32,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Busca transações de uma conta digital por periodo
+            </summary>
+            <param name="digitalAccountId">Id da conta digital</param>
+            <param name="startDate">Data Inicial - Default 30 dias</param>
+            <param name="endDate">Data Final - Default Dia Atual</param>
+            <returns></returns>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Controllers.v1.TransactionController.GetFilterAsync(System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Busca todas transações por filtros
+            </summary>
+            <param name="startDate">Data Inicial - Default 30 dias</param>
+            <param name="endDate">Data Final - Default Dia Atual</param>
+            <returns></returns>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.DigitalAccountResponseDTO.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.DigitalAccountResponseDTO.Number">
+            <summary>
+            Numero
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.DigitalAccountResponseDTO.Digit">
+            <summary>
+            Digito
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Value">
+            <summary>
+            Valor
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Type">
+            <summary>
+            Tipo
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Operation">
+            <summary>
+            Operação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.Status">
+            <summary>
+            Situação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.CreatedDate">
+            <summary>
+            Data de criação
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.DigitalAccount">
+            <summary>
+            Conta Recebedora
+            </summary>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.DTOs.v1.Responses.TransactionResponseDTO.DigitalAccountSender">
+            <summary>
+            Conta Remetente
+            </summary>
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Transaction.Infrastructure.AutoMapper.MappingProfile">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Infrastructure.AutoMapper.MappingProfile.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Infrastructure.Exceptions.ExceptionHandler.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)">
+            <summary> 
+             
+            </summary> 
+            <param name="next"></param> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Infrastructure.Exceptions.ExceptionHandler.Invoke(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="logger"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Infrastructure.Exceptions.ExceptionHandler.HandleExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Infrastructure.Exceptions.ExceptionHandler.WriteExceptionAsync(Microsoft.AspNetCore.Http.HttpContext,System.Exception,System.Net.HttpStatusCode)">
+            <summary> 
+             
+            </summary> 
+            <param name="context"></param> 
+            <param name="exception"></param> 
+            <param name="code"></param> 
+            <returns></returns> 
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Transaction.Infrastructure.Exceptions.ExceptionHandlerExtensions">
+            <summary> 
+             
+            </summary> 
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Infrastructure.Exceptions.ExceptionHandlerExtensions.UseCustomExceptionHandler(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary> 
+             
+            </summary> 
+            <param name="builder"></param> 
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Transaction.Program">
+            <summary>
+            /
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Program.CreateWebHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DigitalBank.Api.Adm.Transaction.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:DigitalBank.Api.Adm.Transaction.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:DigitalBank.Api.Adm.Transaction.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>
