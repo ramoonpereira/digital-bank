@@ -52,8 +52,6 @@ Docker Compose - >= 17.09.0
 - ENCRYPTOR_SECRET: Secret da criptografia no projeto
 - MYSQL_CONNECTIONSTRING: String de conexão com o MySQL
 ```
-[Visualizar](secrets)
-
 
 **Executar Docker:**
 
