@@ -57,8 +57,8 @@ docker-compose up -d
 **Administrador Padrão:**
 
 ```sh
-Email:administrador@digitalbank.com
-Senha:!@12QWqw
+Email: administrador@digitalbank.com
+Senha: !@12QWqw
 ```
 
 **Cliente:**
