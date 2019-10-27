@@ -1,5 +1,5 @@
-﻿using DigitalBank.Api.Pub.DigitalAccount.Security.JWT.Handler.Interfaces;
-using DigitalBank.Api.Pub.DigitalAccount.Security.JWT.Model;
+﻿using DigitalBank.Api.Adm.DigitalAccount.Security.JWT.Handler.Interfaces;
+using DigitalBank.Api.Adm.DigitalAccount.Security.JWT.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace DigitalBank.Api.Pub.DigitalAccount.Security.JWT.Handler
+namespace DigitalBank.Api.Adm.DigitalAccount.Security.JWT.Handler
 {
     public class TokenHandler : ITokenHandler
     {
@@ -71,8 +71,9 @@ namespace DigitalBank.Api.Pub.DigitalAccount.Security.JWT.Handler
         private Task<ClaimsIdentity> GetIdentity(dynamic user, string permissions)
         {
             var identity = new ClaimsIdentity(
-                new GenericIdentity(user.Name, "Customer"),
+                new GenericIdentity(user.Name, "Token"),
                 new[] {
+                    new Claim("Authorization", "Adm-DigitalBank"),
                     new Claim("Id", user.Id.ToString()),
                     new Claim("Name", user.Name),
                     new Claim("Email", user.Email)

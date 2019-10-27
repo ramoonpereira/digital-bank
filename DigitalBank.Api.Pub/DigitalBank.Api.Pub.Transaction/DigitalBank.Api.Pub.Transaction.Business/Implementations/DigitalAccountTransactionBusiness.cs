@@ -90,6 +90,8 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
                                                                                                  TransactionOperationEnum operation,
                                                                                                  DigitalAccountModel digitalAccountSender)
         {
+            await CheckExceededLimitTransctionAsync(transaction.Value, digitalAccountSender.TransferLimitTransaction);
+
             await ValidTransactionIfAccountSenderAndRecipientEqualsAsync(transaction.DigitalAccountSender.Id, transaction.DigitalAccount.Id);
 
             await CheckExceededDigitalAccountDailyLimitTransctionAsync(transaction.DigitalAccountSender.Id, transaction.Value, digitalAccountSender);
@@ -175,6 +177,16 @@ namespace DigitalBank.Api.Pub.Transaction.Business.Implementations
                 endDate = DateTime.Now;
 
             return await _digitalAccountTransactionRepository.GetAllTransactionsByPeriodAsync(digitalAccountId, startDate.Value, endDate.Value);
+        }
+
+
+        private Task CheckExceededLimitTransctionAsync(decimal transactionValue, decimal digitalAccountLimit)
+        {
+            return Task.Run(() =>
+            {
+                if (transactionValue > digitalAccountLimit)
+                    throw new ArgumentException("Nao foi possivel efetuar a transação, limite de valor de transação da conta excedida");
+            });
         }
     }
 }

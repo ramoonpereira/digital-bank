@@ -8,7 +8,7 @@
             <summary>
             Autentica o administrador
             </summary>
-            <param name="login">Objeto de autenticação. O cliente poderá entrar com o e-mail cadastrado</param>
+            <param name="login">Objeto de autenticação. O administrador poderá entrar com o e-mail cadastrado</param>
             <returns></returns>
         </member>
         <member name="P:DigitalBank.Api.Adm.Authenticate.DTOs.v1.Requests.LoginRequestDTO.Email">
