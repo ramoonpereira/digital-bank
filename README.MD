@@ -59,7 +59,7 @@ Docker Compose - >= 17.09.0
 - RABBITMQ_TRANSACTION_RETRY: Intervalo retentativas
 - RABBITMQ_TRANSACTION_COUNT: Quantidade retentativas
 - INTERVAL_ATTEMPT_TRANSACTION: Intervalo em minuto de verificação de transações para fraude
-- RETRY_ATTEMPT_TRANSACTION: Quantidade de transações para fraude
+- RETRY_ATTEMPT_TRANSACTION: Quantidade de transações para fraude no intervalo especificado
 ```
 
 **Executar Docker:**
