@@ -20,6 +20,10 @@ Docker Compose - >= 17.09.0
 
 ## Instalação:
 
+**Docker Compose:**
+
+* [Visual Studio](https://www.docker.com/products/docker-desktop)
+
 **Asp .Net Core:**
 
 * [.NET Core SDK](https://github.com/dotnet/core/blob/master/release-notes/download-archive.md)
@@ -36,11 +40,6 @@ Docker Compose - >= 17.09.0
 **Visual Studio:**
 
 * [Visual Studio](https://visualstudio.microsoft.com/pt-br/)
-
-
-**Docker Compose:**
-
-* [Visual Studio](https://www.docker.com/products/docker-desktop)
 
 
 ## Configuração para Execução do projeto
@@ -74,7 +73,12 @@ Efetuar cadastro da conta digital para geração do acesso.
 
 | Recurso | Url |Versão | Documentação |
 | -- | -- | -- | -- |
-| Autenticação Pública | http://localhost:5001/ | v1 | * [DigitalBank.Api.Pub.Authenticate](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/readme.md) |
+| Autenticação Pública | http://localhost:5001/ | v1 | [DigitalBank.Api.Pub.Authenticate](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/readme.md) |
+| Conta Digital Pública | http://localhost:5002/ | v1 | [DigitalBank.Api.Pub.DigitalAccount](DigitalBank.Api.Pub/DigitalBank.Api.Pub.DigitalAccount/readme.md) |
+| Transação Pública | http://localhost:5003/ | v1 | [DigitalBank.Api.Pub.Transaction](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Transaction/readme.md) |
+| Autenticação Administrativa | http://localhost:7001/ | v1 | [DigitalBank.Api.Adm.Authenticate](DigitalBank.Api.Adm/DigitalBank.Api.Adm.Authenticate/readme.md) |
+| Conta Digital Administrativa | http://localhost:7002/ | v1 | [DigitalBank.Api.Adm.DigitalAccount](DigitalBank.Api.Adm/DigitalBank.Api.Adm.DigitalAccount/readme.md) |
+| Transação Administrativa | http://localhost:7003/ | v1 | [DigitalBank.Api.Adm.Transaction](DigitalBank.Api.Adm/DigitalBank.Api.Adm.Transaction/readme.md) |
 
 
 
