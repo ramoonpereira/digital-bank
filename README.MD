@@ -101,7 +101,7 @@ Efetuar cadastro da conta digital para geração de acesso conforme dados cadast
 | Conta Digital Administrativa | http://localhost:7002/ | v1 | [DigitalBank.Api.Adm.DigitalAccount](DigitalBank.Api.Adm.DigitalAccount/readme.md) |
 | Transação Administrativa | http://localhost:7003/ | v1 | [DigitalBank.Api.Adm.Transaction](DigitalBank.Api.Adm.Transaction/readme.md) |
 | Worker Transação | http://localhost:9001/ | v1 | [DigitalBank.Worker.Transaction](DigitalBank.Worker.Transaction/readme.md) |
-| Migrations | http://localhost:9002/  | v1 | [DigitalBank.Migration](DigitalBank.Migration/DigitalBank.Migration/readme.md) |
+| Migrations | http://localhost:9002/  | v1 | [DigitalBank.Migrations](DigitalBank.Migrations/DigitalBank.Migrations/readme.md) |
 | MySQL | http://localhost:3306/ | 5.7 | [MySQL](DigitalBank.MySQL/readme.md) |
 | RabbitMQ | http://localhost:15672/ | 3.8 | [RabbitMQ](DigitalBank.RabbitMQ/readme.md) |
 

@@ -1,11 +1,11 @@
 # Digital Bank
 
->RabbitMQ
+>DigitalBank.Migrations - Migração de Database
 
 
-**RabbitMQ**
+**Migrations**
 
-* Responsável pelo sistema de mensageria utilizado no projeto
+* Projeto para setup do banco de dados do projeto
 
 
 
