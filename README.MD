@@ -68,9 +68,22 @@ Docker Compose - >= 17.09.0
 docker swarm init
 ```
 
-**Executar Docker:**
+**Para criação de network (rede dos containers):**
 
 ```sh
+docker network create --driver bridge digital-bank
+```
+
+**Executar Ambiente:**
+
+```sh
+./deploy-stack.sh
+```
+
+ou
+
+```sh
+Executar o comando dentro do repositorio de cada aplicação
 docker-compose up -d
 ```
 

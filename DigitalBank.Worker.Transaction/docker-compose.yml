@@ -21,7 +21,13 @@ services:
      - INTERVAL_ATTEMPT_TRANSACTION
     ports:
      - '9001:80'
-  
+    networks:
+      - digital-bank
+      
+networks:
+  digital-bank:
+    external: true 
+    
 secrets:
   MYSQL_CONNECTIONSTRING:
     file: secrets/MYSQL_CONNECTIONSTRING

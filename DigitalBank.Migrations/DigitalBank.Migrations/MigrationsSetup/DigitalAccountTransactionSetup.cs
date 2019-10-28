@@ -24,7 +24,7 @@ namespace DigitalBank.Migrations.MigrationsSetup
 
             builder.Property(c => c.CreatedDate)
                .HasColumnName("created_at")
-               .HasColumnType("TIMESTAMP")
+               .HasColumnType("DATETIME")
                .ValueGeneratedOnAdd();
 
             builder.Property(c => c.Value)
@@ -48,7 +48,7 @@ namespace DigitalBank.Migrations.MigrationsSetup
 
             builder.Property(c => c.ReleaseDate)
                 .HasColumnName("release_at")
-                .HasColumnType("TIMESTAMP")
+                .HasColumnType("DATETIME")
                 .ValueGeneratedOnAdd();
         }
     }

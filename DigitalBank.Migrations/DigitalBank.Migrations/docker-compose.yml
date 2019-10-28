@@ -12,7 +12,13 @@ services:
      - MYSQL_CONNECTIONSTRING
     ports:
      - '9002:80'
+    networks:
+      - digital-bank
 
+networks:
+  digital-bank:
+    external: true 
+    
 secrets:
   MYSQL_CONNECTIONSTRING:
     file: ./secrets/MYSQL_CONNECTIONSTRING
