@@ -2,26 +2,194 @@ version: '3.4'
 
 services:
 
-  digitalbank.worker.transaction:
+  digitalbank.api.adm.transaction:
+    image: digitalbank.api.adm.transaction
+    container_name: digitalbank.api.adm.transaction
     build:
-      context: ./DigitalBank.Worker.Transaction/
-    command: docker-compose up -d
+      context: ./
+      dockerfile: DigitalBank.Api.Adm/DigitalBank.Api.Adm.Transaction/DigitalBank.Api.Adm.Transaction/DockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    secrets:
+     - MYSQL_CONNECTIONSTRING
+     - JWT_SECRET
+     - JWT_EXPIREHOURS
+     - ENCRYPTOR_SECRET
+     - RABBITMQ_HOST
+     - RABBITMQ_PASSWORD
+     - RABBITMQ_USER_NAME
+    ports:
+     - '7003:80'
     networks:
       - digital-bank
     depends_on:
      - mysqldb
      - rabbitmq 
+     - digitalbank.worker.transaction  
 
+  digitalbank.api.adm.digitalaccount:
+    image: digitalbank.api.adm.digitalaccount
+    container_name: digitalbank.api.adm.digitalaccount
+    build:
+      context: ./
+      dockerfile: DigitalBank.Api.Adm/DigitalBank.Api.Adm.DigitalAccount/DigitalBank.Api.Adm.DigitalAccount/DockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    secrets:
+     - MYSQL_CONNECTIONSTRING
+     - JWT_SECRET
+     - JWT_EXPIREHOURS
+     - ENCRYPTOR_SECRET
+     - RABBITMQ_HOST
+     - RABBITMQ_PASSWORD
+     - RABBITMQ_USER_NAME
+    ports:
+     - '7002:80'
+    networks:
+      - digital-bank
+    depends_on:
+     - mysqldb
+     - rabbitmq 
+     - digitalbank.worker.transaction   
+
+  digitalbank.api.adm.authenticate:
+    image: digitalbank.api.adm.authenticate
+    container_name: digitalbank.api.adm.authenticate
+    build:
+      context: ./
+      dockerfile: DigitalBank.Api.Adm/DigitalBank.Api.Adm.Authenticate/DigitalBank.Api.Adm.Authenticate/DockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    secrets:
+     - MYSQL_CONNECTIONSTRING
+     - JWT_SECRET
+     - JWT_EXPIREHOURS
+     - ENCRYPTOR_SECRET
+     - RABBITMQ_HOST
+     - RABBITMQ_PASSWORD
+     - RABBITMQ_USER_NAME
+    ports:
+     - '7001:80'
+    networks:
+      - digital-bank
+    depends_on:
+     - mysqldb
+     - rabbitmq 
+     - digitalbank.worker.transaction   
+ 
+  digitalbank.api.pub.digitalaccount:
+    image: digitalbank.api.pub.digitalaccount
+    container_name: digitalbank.api.pub.digitalaccount
+    build:
+      context: ./
+      dockerfile: DigitalBank.Api.Pub/DigitalBank.Api.Pub.DigitalAccount/DigitalBank.Api.Pub.DigitalAccount/DockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    secrets:
+     - MYSQL_CONNECTIONSTRING
+     - JWT_SECRET
+     - JWT_EXPIREHOURS
+     - ENCRYPTOR_SECRET
+     - RABBITMQ_HOST
+     - RABBITMQ_PASSWORD
+     - RABBITMQ_USER_NAME
+    ports:
+     - '5002:80'
+    networks:
+      - digital-bank
+    depends_on:
+     - mysqldb
+     - rabbitmq 
+     - digitalbank.worker.transaction   
+ 
+  digitalbank.api.pub.authenticate:
+    image: digitalbank.api.pub.authenticate
+    container_name: digitalbank.api.pub.authenticate
+    build:
+      context: ./
+      dockerfile: DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate/DockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    secrets:
+     - MYSQL_CONNECTIONSTRING
+     - JWT_SECRET
+     - JWT_EXPIREHOURS
+     - ENCRYPTOR_SECRET
+     - RABBITMQ_HOST
+     - RABBITMQ_PASSWORD
+     - RABBITMQ_USER_NAME
+    ports:
+     - '5001:80'
+    networks:
+      - digital-bank
+    depends_on:
+     - mysqldb
+     - rabbitmq 
+     - digitalbank.worker.transaction  
+  
+  digitalbank.api.pub.transaction:
+    image: digitalbank.api.pub.transaction
+    container_name: digitalbank.api.pub.transaction
+    build:
+      context: ./
+      dockerfile: DigitalBank.Api.Pub/DigitalBank.Api.Pub.Transaction/DigitalBank.Api.Pub.Transaction/DockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    secrets:
+     - MYSQL_CONNECTIONSTRING
+     - JWT_SECRET
+     - JWT_EXPIREHOURS
+     - ENCRYPTOR_SECRET
+     - RABBITMQ_HOST
+     - RABBITMQ_PASSWORD
+     - RABBITMQ_USER_NAME
+    ports:
+     - '5003:80'
+    networks:
+      - digital-bank
+    depends_on:
+     - mysqldb
+     - rabbitmq 
+     - digitalbank.worker.transaction
+  
+  digitalbank.worker.transaction:
+    image: digitalbank.worker.transaction
+    container_name: digitalbank.worker.transaction
+    build:
+      context: ./
+      dockerfile: DigitalBank.Workers/DigitalBank.Worker.Transaction/DockerFile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    secrets:
+     - MYSQL_CONNECTIONSTRING
+     - JWT_SECRET
+     - JWT_EXPIREHOURS
+     - ENCRYPTOR_SECRET
+     - RABBITMQ_HOST
+     - RABBITMQ_PASSWORD
+     - RABBITMQ_TRANSACTION_COUNT
+     - RABBITMQ_TRANSACTION_EXCHANGE
+     - RABBITMQ_TRANSACTION_QUEUE
+     - RABBITMQ_TRANSACTION_RETRY
+     - RABBITMQ_USER_NAME
+     - RETRY_ATTEMPT_TRANSACTION
+     - INTERVAL_ATTEMPT_TRANSACTION
+    ports:
+     - '9001:80'
+    networks:
+      - digital-bank
+    depends_on:
+     - mysqldb
+     - rabbitmq 
+ 
   mysqldb:
     image: mysql:5.7
     container_name: mysqldb
-    hostname: mysqldb
     environment:
-     - MYSQL_ROOT_PASSWORD=digitalbank
-     - MYSQL_DATABASE=digitalbank
-     - MYSQL_USER=digitalbank
-     - MYSQL_PASSWORD=!@12QWqw
-     - TZ=America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: digitalbank
+      MYSQL_DATABASE: digitalbank
+      MYSQL_USER: digitalbank
+      MYSQL_PASSWORD: '!@12QWqw'
     ports:
       - '3306:3306'  
     volumes:
@@ -30,9 +198,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
-    hostname: rabbitmq
     ports:
-      - '5672:5672'
       - '15672:15672'
     networks:
       - digital-bank
@@ -41,7 +207,35 @@ services:
     environment:
      - RABBITMQ_ERLANG_COOKIE=digitalbank
      - RABBITMQ_DEFAULT_USER=digitalbank
-     - RABBITMQ_DEFAULT_PASS=!@12QWqw    
+     - RABBITMQ_DEFAULT_PASS='!@12QWqw'
+     
+secrets:
+  MYSQL_CONNECTIONSTRING:
+    file: ./secrets/MYSQL_CONNECTIONSTRING
+  JWT_SECRET:
+    file: ./secrets/JWT_SECRET
+  JWT_EXPIREHOURS:
+    file: ./secrets/JWT_EXPIREHOURS
+  ENCRYPTOR_SECRET:
+    file: ./secrets/ENCRYPTOR_SECRET
+  RABBITMQ_HOST:
+    file: ./secrets/RABBITMQ_HOST
+  RABBITMQ_PASSWORD:
+    file: ./secrets/RABBITMQ_PASSWORD
+  RABBITMQ_TRANSACTION_COUNT:
+    file: ./secrets/RABBITMQ_TRANSACTION_COUNT
+  RABBITMQ_TRANSACTION_EXCHANGE:
+    file: ./secrets/RABBITMQ_TRANSACTION_EXCHANGE   
+  RABBITMQ_TRANSACTION_QUEUE:
+    file: ./secrets/RABBITMQ_TRANSACTION_QUEUE
+  RABBITMQ_TRANSACTION_RETRY:
+    file: ./secrets/RABBITMQ_TRANSACTION_RETRY
+  RABBITMQ_USER_NAME:
+    file: ./secrets/RABBITMQ_USER_NAME
+  RETRY_ATTEMPT_TRANSACTION:
+    file: ./secrets/RETRY_ATTEMPT_TRANSACTION
+  INTERVAL_ATTEMPT_TRANSACTION:
+    file: ./secrets/INTERVAL_ATTEMPT_TRANSACTION
    
 networks:
   digital-bank:

@@ -8,7 +8,7 @@
 ```sh
 Asp .Net Core - >= 2.2
 Docker Compose - >= 17.09.0
-RabbitMQ - 3.0 
+RabbitMQ - 3.8 
 Visual Studio - 2019
 MySql - 5.7
 ```
@@ -94,15 +94,15 @@ Efetuar cadastro da conta digital para geração de acesso conforme dados cadast
 
 | Recurso | Url |Versão | Documentação |
 | -- | -- | -- | -- |
-| Autenticação Pública | http://localhost:5001/ | v1 | [DigitalBank.Api.Pub.Authenticate](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/readme.md) |
-| Conta Digital Pública | http://localhost:5002/ | v1 | [DigitalBank.Api.Pub.DigitalAccount](DigitalBank.Api.Pub/DigitalBank.Api.Pub.DigitalAccount/readme.md) |
-| Transação Pública | http://localhost:5003/ | v1 | [DigitalBank.Api.Pub.Transaction](DigitalBank.Api.Pub/DigitalBank.Api.Pub.Transaction/readme.md) |
-| Autenticação Administrativa | http://localhost:7001/ | v1 | [DigitalBank.Api.Adm.Authenticate](DigitalBank.Api.Adm/DigitalBank.Api.Adm.Authenticate/readme.md) |
-| Conta Digital Administrativa | http://localhost:7002/ | v1 | [DigitalBank.Api.Adm.DigitalAccount](DigitalBank.Api.Adm/DigitalBank.Api.Adm.DigitalAccount/readme.md) |
-| Transação Administrativa | http://localhost:7003/ | v1 | [DigitalBank.Api.Adm.Transaction](DigitalBank.Api.Adm/DigitalBank.Api.Adm.Transaction/readme.md) |
-| Worker Transação | http://localhost:9001/ | v1 | [DigitalBank.Worker.Transaction](DigitalBank.Workers/DigitalBank.Worker.Transaction/readme.md) |
-| Migrations | --- | v1 | [DigitalBank.Migration](DigitalBank.Migrations/DigitalBank.Migration/readme.md) |
-| MySQL | http://localhost:3306/ | 5.7 | --- |
-| RabbitMQ | http://localhost:15672/ | 3.8 | --- |
+| Autenticação Pública | http://localhost:5001/ | v1 | [DigitalBank.Api.Pub.Authenticate](DigitalBank.Api.Pub.Authenticate/readme.md) |
+| Conta Digital Pública | http://localhost:5002/ | v1 | [DigitalBank.Api.Pub.DigitalAccount](DigitalBank.Api.Pub.DigitalAccount/readme.md) |
+| Transação Pública | http://localhost:5003/ | v1 | [DigitalBank.Api.Pub.Transaction](DigitalBank.Api.Pub.Transaction/readme.md) |
+| Autenticação Administrativa | http://localhost:7001/ | v1 | [DigitalBank.Api.Adm.Authenticate](DigitalBank.Api.Adm.Authenticate/readme.md) |
+| Conta Digital Administrativa | http://localhost:7002/ | v1 | [DigitalBank.Api.Adm.DigitalAccount](DigitalBank.Api.Adm.DigitalAccount/readme.md) |
+| Transação Administrativa | http://localhost:7003/ | v1 | [DigitalBank.Api.Adm.Transaction](DigitalBank.Api.Adm.Transaction/readme.md) |
+| Worker Transação | http://localhost:9001/ | v1 | [DigitalBank.Worker.Transaction](DigitalBank.Worker.Transaction/readme.md) |
+| Migrations | http://localhost:9002/  | v1 | [DigitalBank.Migration](DigitalBank.Migration/DigitalBank.Migration/readme.md) |
+| MySQL | http://localhost:3306/ | 5.7 | [MySQL](DigitalBank.MySQL/readme.md) |
+| RabbitMQ | http://localhost:15672/ | 3.8 | [RabbitMQ](DigitalBank.RabbitMQ/readme.md) |
 
 
