@@ -11,7 +11,7 @@
 | -- | -- | -- | -- | -- |
 | / | v1 |Interface para documentação da API| GET | |
 | /digitalaccount/v1 | v1 | Método para cadastrar uma nova cota digital | POST |  --- |
-| /digitalaccount/v1/{customerId}/bycustomer | v1 | Método para buscar uma conta digital especifica | GET |  [:white_check_mark:] [OAuth2] |
+| /digitalaccount/v1/{customerId}/bycustomer | v1 | Método para buscar uma conta digital especifica | GET |  [:white_check_mark:]|
 
 
 ## Configuração para Execução do projeto

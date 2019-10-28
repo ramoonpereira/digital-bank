@@ -10,9 +10,9 @@
 | Rota | Versão |Descrição | HTTP Method | Autenticação |
 | -- | -- | -- | -- | -- |
 | / | v1 |Interface para documentação da API| GET | |
-| /transaction/v1/{transactionId} | v1 | Método para buscar uma transação especifica | GET |  [:white_check_mark:] [OAuth2] |
-| /transaction/v1/{digitalAccountId}/transactions | v1 | Método para buscar as transações de uma conta  | GET |  [:white_check_mark:] [OAuth2] |
-| /transaction/v1/filter | v1 | Método para filtrar transações | GET |  [:white_check_mark:] [OAuth2] |
+| /transaction/v1/{transactionId} | v1 | Método para buscar uma transação especifica | GET |  [:white_check_mark:] |
+| /transaction/v1/{digitalAccountId}/transactions | v1 | Método para buscar as transações de uma conta  | GET |  [:white_check_mark:] |
+| /transaction/v1/filter | v1 | Método para filtrar transações | GET |  [:white_check_mark:] |
 
 ## Configuração para Execução do projeto
 

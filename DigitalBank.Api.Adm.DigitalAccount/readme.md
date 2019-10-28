@@ -10,9 +10,9 @@
 | Rota | Versão |Descrição | HTTP Method | Autenticação |
 | -- | -- | -- | -- | -- |
 | / | v1 |Interface para documentação da API| GET | |
-| /digitalaccount/v1/{customerId}/bycustomer| v1 | Método para buscar uma conta digital especifica pelo id do cliente | GET |  [:white_check_mark:] [OAuth2] |
-| /digitalaccount/v1/{id} | v1 | Método para buscar uma conta digital especifica | GET |  [:white_check_mark:] [OAuth2] |
-| /digitalaccount/v1 | v1 | Método para buscar todas as contas | GET |  [:white_check_mark:] [OAuth2] |
+| /digitalaccount/v1/{customerId}/bycustomer| v1 | Método para buscar uma conta digital especifica pelo id do cliente | GET |  [:white_check_mark:] |
+| /digitalaccount/v1/{id} | v1 | Método para buscar uma conta digital especifica | GET |  [:white_check_mark:] |
+| /digitalaccount/v1 | v1 | Método para buscar todas as contas | GET |  [:white_check_mark:]|
 
 ## Configuração para Execução do projeto
 
