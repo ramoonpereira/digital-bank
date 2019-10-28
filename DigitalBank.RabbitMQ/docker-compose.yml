@@ -14,5 +14,5 @@ services:
     environment:
      - RABBITMQ_ERLANG_COOKIE=digitalbank
      - RABBITMQ_DEFAULT_USER=digitalbank
-     - RABBITMQ_DEFAULT_PASS=!@12QWqw    
-   
+     - RABBITMQ_DEFAULT_PASS=!@12QWqw
+    network_mode: 'bridge' 
