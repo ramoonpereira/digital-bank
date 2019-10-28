@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
+    hostname: mysqldb
+    environment:
+     - MYSQL_ROOT_PASSWORD=digitalbank
+     - MYSQL_DATABASE=digitalbank
+     - MYSQL_USER=digitalbank
+     - MYSQL_PASSWORD=!@12QWqw
+     - TZ=America/Sao_Paulo
+    ports:
+      - '3306:3306'  
+    volumes:
+      - /data:/var/lib/mysql      
+ 

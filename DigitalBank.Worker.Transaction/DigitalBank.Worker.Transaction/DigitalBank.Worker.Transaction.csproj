@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.2</TargetFramework>
+		<GenerateProgramFile>false</GenerateProgramFile>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.DockerSecrets.Unofficial" Version="1.1.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DigitalBank.Worker.Transaction.Business\DigitalBank.Worker.Transaction.Business.csproj" />
+    <ProjectReference Include="..\DigitalBank.Worker.Transaction.Repository\DigitalBank.Worker.Transaction.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

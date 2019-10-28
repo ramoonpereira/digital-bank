@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+    
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+     - /storage/rabbitmq:/var/lib/rabbitmq
+    environment:
+     - RABBITMQ_ERLANG_COOKIE=digitalbank
+     - RABBITMQ_DEFAULT_USER=digitalbank
+     - RABBITMQ_DEFAULT_PASS=!@12QWqw    
+   
