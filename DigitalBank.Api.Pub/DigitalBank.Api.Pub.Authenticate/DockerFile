@@ -1,25 +1,27 @@
-FROM microsoft/dotnet:2.2-sdk AS build-env
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
 
+FROM microsoft/dotnet:2.2-sdk AS build
+
 WORKDIR /src
 
-COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.csproj DigitalBank.Api.Pub.Authenticate/
-COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Business/DigitalBank.Api.Pub.Authenticate.Business.csproj DigitalBank.Api.Pub.Authenticate.Business/
-COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Repository/DigitalBank.Api.Pub.Authenticate.Repository.csproj DigitalBank.Api.Pub.Authenticate.Repository/
-COPY ./DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Security/DigitalBank.Api.Pub.Authenticate.Security.csproj DigitalBank.Api.Pub.Authenticate.Security/
+COPY DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.csproj DigitalBank.Api.Pub.Authenticate/
+COPY DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Business/DigitalBank.Api.Pub.Authenticate.Business.csproj DigitalBank.Api.Pub.Authenticate.Business/
+COPY DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Repository/DigitalBank.Api.Pub.Authenticate.Repository.csproj DigitalBank.Api.Pub.Authenticate.Repository/
+COPY DigitalBank.Api.Pub/DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.Security/DigitalBank.Api.Pub.Authenticate.Security.csproj DigitalBank.Api.Pub.Authenticate.Security/
+
+RUN dotnet restore DigitalBank.Api.Pub.Authenticate/DigitalBank.Api.Pub.Authenticate.csproj
 
 COPY . .
 
 WORKDIR /src/DigitalBank.Api.Pub.Authenticate
+RUN dotnet build DigitalBank.Api.Pub.Authenticate.csproj -c Release -o /app
 
-RUN dotnet restore DigitalBank.Api.Pub.Authenticate.csproj
+FROM build AS publish
+RUN dotnet publish DigitalBank.Api.Pub.Authenticate.csproj -c Release -o /app
 
-RUN dotnet build DigitalBank.Api.Pub.Authenticate.csproj
-
-RUN dotnet publish DigitalBank.Api.Pub.Authenticate.csproj -c Release -o out /app
-
-FROM microsoft/dotnet:2.2-aspnetcore-runtime
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "DigitalBank.Api.Pub.Authenticate.dll"]

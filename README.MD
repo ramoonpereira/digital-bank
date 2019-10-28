@@ -62,6 +62,12 @@ Docker Compose - >= 17.09.0
 - RETRY_ATTEMPT_TRANSACTION: Quantidade de transações para fraude no intervalo especificado
 ```
 
+**Para ativar politica de secrets (Caso não ativo no docker):**
+
+```sh
+docker swarm init
+```
+
 **Executar Docker:**
 
 ```sh
@@ -95,6 +101,7 @@ Efetuar cadastro da conta digital para geração de acesso conforme dados cadast
 | Conta Digital Administrativa | http://localhost:7002/ | v1 | [DigitalBank.Api.Adm.DigitalAccount](DigitalBank.Api.Adm/DigitalBank.Api.Adm.DigitalAccount/readme.md) |
 | Transação Administrativa | http://localhost:7003/ | v1 | [DigitalBank.Api.Adm.Transaction](DigitalBank.Api.Adm/DigitalBank.Api.Adm.Transaction/readme.md) |
 | Worker Transação | http://localhost:9001/ | v1 | [DigitalBank.Worker.Transaction](DigitalBank.Workers/DigitalBank.Worker.Transaction/readme.md) |
+| Migrations | --- | v1 | [DigitalBank.Migration](DigitalBank.Migrations/DigitalBank.Migration/readme.md) |
 | MySQL | http://localhost:3306/ | 5.7 | --- |
 | RabbitMQ | http://localhost:15672/ | 3.0 | --- |
 
