@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY-}digitalbankworkertransaction
     build:
       context: .
-      dockerfile: DigitalBank.Worker.Transaction/Dockerfile
+      dockerfile: Dockerfile
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     secrets:
@@ -22,7 +22,7 @@ services:
     ports:
      - '9001:80'
     networks:
-      - digital-bank
+     - digital-bank
       
 networks:
   digital-bank:

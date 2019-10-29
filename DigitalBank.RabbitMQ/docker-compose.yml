@@ -16,7 +16,7 @@ services:
      - RABBITMQ_DEFAULT_USER=digitalbank
      - RABBITMQ_DEFAULT_PASS=!@12QWqw
     networks:
-      - digital-bank
+     - digital-bank
    
 networks:
   digital-bank:

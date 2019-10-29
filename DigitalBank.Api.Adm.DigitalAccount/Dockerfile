@@ -11,12 +11,12 @@ COPY ["DigitalBank.Api.Adm.DigitalAccount.Business/DigitalBank.Api.Adm.DigitalAc
 RUN dotnet restore "DigitalBank.Api.Adm.DigitalAccount/DigitalBank.Api.Adm.DigitalAccount.csproj"
 COPY . .
 WORKDIR "/src/DigitalBank.Api.Adm.DigitalAccount"
-RUN dotnet build "DigitalBank.Api.Adm.DigitalAccount.csproj" -c Release -o /app/build
+RUN dotnet build "DigitalBank.Api.Adm.DigitalAccount.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "DigitalBank.Api.Adm.DigitalAccount.csproj" -c Release -o /app/publish
+RUN dotnet publish "DigitalBank.Api.Adm.DigitalAccount.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "DigitalBank.Api.Adm.DigitalAccount.dll"]

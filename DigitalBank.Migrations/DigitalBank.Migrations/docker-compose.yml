@@ -13,7 +13,7 @@ services:
     ports:
      - '9002:80'
     networks:
-      - digital-bank
+     - digital-bank
 
 networks:
   digital-bank:
