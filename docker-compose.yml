@@ -33,7 +33,8 @@ services:
         - 'docker_data:/data/var/lib/portainer'
         - /var/run/docker.sock:/var/run/docker.sock
    
-  digitalbank.migrations:
+  digitalbank-migrations:
+    image: digitalbank-migrations:latest
     build:
       context: DigitalBank.Migrations
       dockerfile: Dockerfile
@@ -48,7 +49,8 @@ services:
      - mysqldb
      - portainer
      
-  digitalbank.worker.transaction:
+  digitalbank-worker-transaction:
+    image: digitalbank-worker-transaction:latest
     build:
       context: DigitalBank.Worker.Transaction
       dockerfile: Dockerfile
@@ -74,7 +76,8 @@ services:
      - mysqldb
      - portainer
 
-  digitalbank.api.pub.transaction:
+  digitalbank-api-pub-transaction:
+    image: digitalbank-api-pub-transaction:latest
     build:
       context: DigitalBank.Api.Pub.Transaction
       dockerfile: Dockerfile
@@ -95,7 +98,8 @@ services:
      - mysqldb
      - portainer
      
-  digitalbank.api.pub.digitalaccount:
+  digitalbank-api-pub-digitalaccount:
+    image: digitalbank-api-pub-digitalaccount:latest
     build:
       context: DigitalBank.Api.Pub.DigitalAccount
       dockerfile: Dockerfile
@@ -113,7 +117,8 @@ services:
      - mysqldb
      - portainer
      
-  digitalbank.api.pub.authenticate:
+  digitalbank-api-pub-authenticate:
+    image: digitalbank-api-pub-authenticate:latest
     build:
       context: DigitalBank.Api.Pub.Authenticate
       dockerfile: Dockerfile
@@ -131,7 +136,8 @@ services:
      - mysqldb
      - portainer
 
-  digitalbank.api.adm.transaction:
+  digitalbank-api-adm-transaction:
+    image: digitalbank-api-adm-transaction:latest
     build:
       context: DigitalBank.Api.Adm.Transaction
       dockerfile: Dockerfile
@@ -149,7 +155,8 @@ services:
      - mysqldb
      - portainer
      
-  digitalbank.api.adm.digitalaccount:
+  digitalbank-api-adm-digitalaccount:
+    image: digitalbank-api-adm-digitalaccount:latest
     build:
       context: DigitalBank.Api.Adm.DigitalAccount
       dockerfile: Dockerfile
@@ -167,7 +174,8 @@ services:
      - mysqldb
      - portainer
      
-  digitalbank.api.adm.authenticate:
+  digitalbank-api-adm-authenticate:
+    image: digitalbank-api-adm-authenticate:latest  
     build:
       context: DigitalBank.Api.Adm.Authenticate
       dockerfile: Dockerfile
